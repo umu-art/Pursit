@@ -55,7 +55,6 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBESECRET }}
-        context: twc-ue95500-1008341
 
     - name: Deploy
       run: kubectl rollout restart deployment/pursit-ui -n pursit

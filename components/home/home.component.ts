@@ -60,6 +60,8 @@ export class HomeComponent implements OnDestroy {
     if (this.isPlaying) {
       this.playedTime += new Date().getTime() - this.startPlayingTime;
     }
-    this.apmService.logGoto('watched video', this.playedTime.toString());
+    if (this.playedTime > 0) {
+      this.apmService.logGoto('watched video', this.playedTime.toString());
+    }
   }
 }

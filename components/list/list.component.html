@@ -1,0 +1,5 @@
+<p>Выбирай себе пирожок:</p>
+<app-sitter-card
+  *ngFor="let sitter of sitters"
+  [sitter]="sitter"></app-sitter-card>
+<button (click)="home()">Вернутся домой хочу</button>

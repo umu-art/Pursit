@@ -55,7 +55,7 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBESECRET }}
-        context: kubernetes-admin@kubernetes
+        context: twc-ue95500-1008341
 
     - name: Deploy
       run: kubectl rollout restart deployment/pursit-ui -n pursit

@@ -21,7 +21,7 @@ spec:
                 port:
                   name: http
 
-    - host: пурсит.рф
+    - host: xn--h1andegc.xn--p1ai
       http:
         paths:
           - path: /
@@ -34,5 +34,5 @@ spec:
   tls:
     - hosts:
         - pursit.ru
-        - пурсит.рф
+        - xn--h1andegc.xn--p1ai
       secretName: pursit-tls

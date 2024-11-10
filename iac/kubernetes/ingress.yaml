@@ -20,7 +20,19 @@ spec:
                 name: pursit-ui
                 port:
                   name: http
+
+    - host: пурсит.рф
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pursit-ui
+                port:
+                  name: http
   tls:
     - hosts:
         - pursit.ru
+        - пурсит.рф
       secretName: pursit-tls

@@ -60,6 +60,7 @@ button {
   font-family: eMontserrat, serif;
   font-size: 20px;
   color: white;
+  transition: all 0.2s;
 }
 
 button:hover {

@@ -1,3 +1,38 @@
-<p [textContent]="sitter"></p>
-<button (click)="contacts()">Показать контакты</button>
-<p [hidden]="!contactsShow">88005553535</p>
+<div class="w-container">
+  <div>
+    <img
+      class="avatar"
+      [src]="sitter.photoUrl" alt="sitter photo">
+    <p class="takeContext"
+       [innerText]="sitter.takeContext"></p>
+  </div>
+
+  <div class="body-container">
+    <p class="title"
+       [textContent]="sitter.name"></p>
+    <p class="desc"
+       [innerText]="opened ? sitter.fullDescription : sitter.shortDescription"></p>
+
+    <div *ngIf="opened">
+      <p class="title">Фотографии передержек</p>
+      <div class="sit-photo-container">
+        <div
+          class="sit-photo"
+          *ngFor="let photo of sitter.photosUrls"
+          [style.background-image]="'url(' + photo + ')'"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <button
+        class="show-more"
+        [textContent]="opened ? 'Скрыть' : 'Подробнее'"
+        (click)="showMore()"></button>
+      <button
+        (click)="contacts()"
+        [disabled]="contactsShow"
+        [innerText]="contactsShow ? sitter.contacts : 'Показать контакты'">Показать контакты
+      </button>
+    </div>
+  </div>
+</div>

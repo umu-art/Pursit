@@ -2,12 +2,20 @@ import {Component, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {ApmService} from '../../lib/apm.service';
 import {YoutubePlayerComponent} from 'ngx-youtube-player';
+import {NgForOf} from '@angular/common';
+
+class FaqQuestion {
+  q: string = ''
+  a: string = ''
+  opened: boolean = false
+}
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    YoutubePlayerComponent
+    YoutubePlayerComponent,
+    NgForOf
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -65,10 +73,46 @@ export class HomeComponent implements OnDestroy {
     }
   }
 
-  hideFaq: boolean[] = Array(5).fill(true);
+  faq: FaqQuestion[] = [
+    {
+      q: "Каких животных вы берёте на передержку?",
+      a: "Мы принимаем собак и кошек любых пород.",
+      opened: false
+    },
+    {
+      q: "Какие буду условия проживания у питомца?",
+      a: "Ситтер обеспечит вашего любимца просторным и комфортным помещением, где он не будет чувствовать себя стеснённым.",
+      opened: false
+    },
+    {
+      q: "Как я могу заказать услугу для своего питомца?",
+      a: "Вам достаточно перейти на соответствующую страницу с услугой и выбрать из списка того человека, которому вы доверите своего питомца.",
+      opened: false
+    },
+    {
+      q: "Можно ли заранее встретиться с ситтером и посмотреть место, где будет происходить передержка?",
+      a: "Конечно, для этого нужно будет связаться с понравившимся вам ситтером и назначить встречу.",
+      opened: false
+    },
+    {
+      q: "Каковы цены на ваши услуги?",
+      a: "Цены зависят от того, кто предоставляет услуги и того, какого питомца вы захотите ему сдать.",
+      opened: false
+    },
+    {
+      q: "Почему я могу быть уверен, что с моим питомцем всё хорошо?",
+      a: "Вам будут предоставляться постоянные фотографии и видео вашего питомца, по которым вы сможете с лёгкостью отследить его состояние.",
+      opened: false
+    },
+    {
+      q: "Можно ли предоставлять свои корма и принадлежности?",
+      a: "Да, желательно принести привычную еду и вещи вашего питомца (игрушки, миски, лежак), чтобы снизить стресс от временной смены обстановки.",
+      opened: false
+    }
+  ]
 
   showFaq(index: number) {
-    this.hideFaq[index] = !this.hideFaq[index];
+    this.faq[index].opened = !this.faq[index].opened;
   }
 
   protected readonly document = document;

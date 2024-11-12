@@ -1,0 +1,74 @@
+.list-header {
+  display: flex;
+  flex-direction: column;
+  margin-top: 64px;
+}
+
+.title {
+  margin-top: 64px;
+  margin-bottom: 0;
+  margin-left: 92px;
+  font-family: eRibeye, serif;
+  font-size: 76px;
+  line-height: 88px;
+  color: var(--main-color);
+}
+
+.slog {
+  margin-top: 20px;
+  margin-left: 92px;
+  margin-bottom: 92px;
+  font-family: eMontserrat, serif;
+  font-weight: 300;
+  font-size: 25px;
+}
+
+.desc {
+  margin: 64px;
+  font-family: eMontserrat, serif;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.goto-container {
+  padding-right: 64px;
+  padding-left: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.goto-option {
+  margin: 0;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 40px;
+  background-color: white;
+  color: black;
+  font-family: eMontserrat, serif;
+  font-size: 20px;
+  box-shadow: 8px 8px 36px rgba(0, 0, 0, 0.2);
+
+  transition: all 0.2s;
+}
+
+.goto-option-selected {
+  background-color: var(--main-color);
+  color: white;
+}
+
+.goto-option:hover {
+  background-color: var(--main-color-hover);
+  color: white;
+}
+
+.goto-option:active {
+  background-color: var(--main-color-pressed);
+  color: white;
+}
+
+.sitter-card {
+  margin: 64px 0;
+  padding: 64px 92px;
+}

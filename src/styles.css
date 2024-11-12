@@ -1,1 +1,76 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  min-width: 960px;
+}
+
+:root {
+  --main-color: #ff7100;
+  --main-color-pressed: #c25600;
+  --main-color-hover: #ff8b2e;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@font-face {
+  font-family: 'eRibeye';
+  src: url('/fonts/ribeye_regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'eMontserrat';
+  src: url('/fonts/montserrat.ttf') format('truetype');
+}
+
+.block {
+  background-color: white;
+  box-shadow: 8px 8px 36px rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
+}
+
+.h-container {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.w-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.col3 {
+  width: 90%;
+}
+
+.col1 {
+  width: 25%;
+}
+
+button {
+  padding: 16px 32px;
+  border: none;
+  border-radius: 40px;
+  background-color: var(--main-color);
+  font-family: eMontserrat, serif;
+  font-size: 20px;
+  color: white;
+}
+
+button:hover {
+  background-color: var(--main-color-hover);
+}
+
+button:active {
+  background-color: var(--main-color-pressed);
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}

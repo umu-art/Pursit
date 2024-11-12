@@ -64,4 +64,12 @@ export class HomeComponent implements OnDestroy {
       this.apmService.logGoto('watched video', this.playedTime.toString());
     }
   }
+
+  hideFaq: boolean[] = Array(5).fill(true);
+
+  showFaq(index: number) {
+    this.hideFaq[index] = !this.hideFaq[index];
+  }
+
+  protected readonly document = document;
 }

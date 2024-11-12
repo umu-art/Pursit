@@ -1,0 +1,122 @@
+.title {
+  margin-top: 72px;
+  margin-bottom: 0;
+  margin-left: 72px;
+  font-family: eRibeye, serif;
+  font-size: 76px;
+  line-height: 88px;
+  color: var(--main-color);
+}
+
+.slog {
+  margin-top: 32px;
+  margin-left: 72px;
+  font-family: eMontserrat, serif;
+  font-weight: 300;
+  font-size: 25px;
+}
+
+.title-img{
+  width: 360px;
+  margin-right: 56px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.desc {
+  margin: 64px;
+  font-family: eMontserrat, serif;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.logo-slog-img-card {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.moral-sitting-card {
+  padding: 32px 0 32px 64px;
+  margin-bottom: 40px;
+}
+
+.moral-sitting-card-title {
+  margin: 0 0 0 0;
+  font-family: eMontserrat, serif;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 32px;
+}
+
+.moral-sitting-card-description {
+  font-family: eMontserrat, serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.moral-sitting-card-icon{
+  margin-right: 32px;
+}
+
+.sitting-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 32px;
+}
+
+.sitting-card p {
+  margin-bottom: 48px;
+}
+
+.sitting-card-title {
+  font-family: eMontserrat, serif;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 32px;
+}
+
+.sitting-card-icon {
+  margin-top: 32px;
+}
+
+.video {
+  width: 100%;
+}
+
+.faq-card {
+  position: relative;
+  margin-bottom: 32px;
+  padding: 24px 48px;
+  font-family: eMontserrat, serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 32px;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.faq-card-text {
+  margin: 0;
+}
+
+.faq-open{
+  height: 32px;
+  position: absolute;
+  right: 48px;
+  top: 24px;
+  transition: all 0.2s;
+}
+
+.line {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  height: 1px;
+  background-color: black;
+}

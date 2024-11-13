@@ -1,8 +1,8 @@
 <div class="w-container">
   <div>
-    <img
+    <div
       class="avatar"
-      [src]="sitter.photoUrl" alt="sitter photo">
+      [style.background-image]="'url(' + sitter.photoUrl + ')'"></div>
     <p class="takeContext"
        [innerText]="sitter.takeContext"></p>
   </div>

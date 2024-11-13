@@ -8,6 +8,5 @@ export const routes: Routes = [
   {path: 'list', component: ListComponent},
   {path: 'moral-pet-sitting', component: MoralPetSittingComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/home'},
-  {path: '/', redirectTo: '/home'}
+  {path: '**', redirectTo: '/home'}
 ];

@@ -57,7 +57,7 @@ export class ListComponent {
             takeContext: 'Беру: только собак\n' +
               ' Стаж: 5 лет\n' +
               'Готова сама приехать\n' +
-              ' Цена: 1000 рублей / сутки\n',
+              ' Цена: 1400 рублей / сутки\n',
             photosUrls: [
               'https://avatars.mds.yandex.net/get-mpic/5234821/img_id2812199921958822304.jpeg/orig',
               'https://sun1-54.userapi.com/impg/YUU-RrZqrh2SaYnuCgIGVcNY4dz_aiXuwP_n3g/s8qhxqq9AWA.jpg?size=640x480&quality=96&sign=87bdf61fabfb6bfe3a5add3922dfafd4&c_uniq_tag=K5vx4FbpFPlVMndvxMDnfoW3s0s76uiq5Fo4biofOGI&type=album',

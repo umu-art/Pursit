@@ -92,3 +92,9 @@ jobs:
           version: 2.6.7
           options:  --server argocd.umu-art.ru --grpc-web --auth-token ${{ secrets.ARGO_TOKEN }}
           command: app sync pursit --prune --timeout 300
+
+      - uses: clowdhaus/argo-cd-action/@main
+        with:
+          version: 2.6.7
+          options:  --server argocd.umu-art.ru --grpc-web --auth-token ${{ secrets.ARGO_TOKEN }}
+          command: app wait pursit --degraded --timeout 30

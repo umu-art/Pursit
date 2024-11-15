@@ -11,41 +11,16 @@
 }
 
 .title {
-  font-family: eRibeye, serif;
-  font-size: 38px;
-  line-height: 38px;
-  color: var(--main-color);
   margin-top: 14px;
   margin-left: 19px;
   margin-bottom: 0;
 }
 
-.logo-container {
-  display: flex;
-  flex-direction: row;
-}
-
 .sel {
   width: 160px;
   margin: 16px 16px 0 0;
-  font-family: eMontserrat, serif;
-  text-align: left;
-  line-height: 20px;
-  font-size: 16px;
-  font-weight: 500;
 }
 
-.contact {
-  font-family: eMontserrat, serif;
-  text-align: left;
-  line-height: 20px;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.features-container {
-  margin-left: 10%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+.mb-32 {
+  margin-bottom: 32px;
 }

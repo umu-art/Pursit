@@ -1,28 +1,32 @@
 <div class="block list-header">
-  <p class="title">Purrfect Sitters</p>
-  <p class="slog">Сервис заботы о вашем питомце</p>
+  <p class="title font-title-big">Purrfect Sitters</p>
+  <p class="slog font-25">Сервис заботы о вашем питомце</p>
 </div>
 <p class="desc"><b>Наши специалисты</b></p>
-<div class="goto-container">
-  <p class="goto-option"
-     [ngClass]="{'goto-option-selected': category === 'moral-pet-sitting'}"
-     (click)="moralPetSitting()">
-    передержка с зоопсихологом</p>
+<div class="w-container goto-container">
+  <div class="goto-option"
+       [ngClass]="{'goto-option-selected': category === 'moral-pet-sitting'}"
+       (click)="moralPetSitting()">
+    <p>передержка с зоопсихологом</p>
+  </div>
 
-  <p class="goto-option"
-     [ngClass]="{'goto-option-selected': category === 'pet-sitting'}"
-     (click)="petSitting()">
-    передержка</p>
+  <div class="goto-option"
+       [ngClass]="{'goto-option-selected': category === 'pet-sitting'}"
+       (click)="petSitting()">
+    <p>передержка</p>
+  </div>
 
-  <p class="goto-option"
-     [ngClass]="{'goto-option-selected': category === 'pet-health'}"
-     (click)="petHealth()">
-    ветеринар</p>
+  <div class="goto-option"
+       [ngClass]="{'goto-option-selected': category === 'pet-health'}"
+       (click)="petHealth()">
+    <p>ветеринар</p>
+  </div>
 
-  <p class="goto-option"
-     [ngClass]="{'goto-option-selected': category === 'pet-moving'}"
-     (click)="petMoving()">
-    перевозка</p>
+  <div class="goto-option"
+       [ngClass]="{'goto-option-selected': category === 'pet-moving'}"
+       (click)="petMoving()">
+    <p>перевозка</p>
+  </div>
 </div>
 <div
   *ngFor="let sitter of sitters"

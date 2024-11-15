@@ -1,19 +1,14 @@
 .app-container {
-  min-width: 768px;
-  margin-left: 120px;
-  margin-right: 120px;
-  margin-top: 20px;
+  flex: 1;
+  min-height: 100vh;
+  width: min(95%, 1200px);
 }
 
 .app-header {
-  padding-left: 120px;
-  padding-right: 120px;
   margin-top: 20px;
   display: block;
-  height: 96px;
 }
 
 .app-bottom {
   display: block;
-  height: 240px;
 }

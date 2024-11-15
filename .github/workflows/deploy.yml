@@ -88,4 +88,4 @@ jobs:
 
     steps:
       - name: Argo sync
-        run: argocd --server argocd.umu-art.ru --grpc-web --auth-token ${{ secret.ARGO_TOKEN }} app sync pursit --prune --timeout 300
+        run: argocd --server argocd.umu-art.ru --grpc-web --auth-token ${{ secrets.ARGO_TOKEN }} app sync pursit --prune --timeout 300

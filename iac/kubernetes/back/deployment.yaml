@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: pursit-back
+  namespace: pursit
+  labels:
+    app: pursit-back
+
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: pursit-back
+
+  template:
+    metadata:
+      name: pursit-back
+      labels:
+        app: pursit-back
+
+    spec:
+      containers:
+        - name: pursit-back
+          image: ghcr.io/umu-art/pursit-back:master
+          imagePullPolicy: Always
+
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-token
+                  key: token
+            - name: POSTGRES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: kasumi-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kasumi-secrets
+                  key: POSTGRES_PASSWORD
+            - name: ELASTIC_APM_SERVER_URL
+              value: http://apm-server.monitoring.svc.cluster.local:8200
+            - name: ELASTIC_APM_SERVICE_NAME
+              value: pursit-back
+            - name: ELASTIC_APM_APPLICATION_PACKAGES
+              value: ru.kazenin.pursit
+            - name: ELASTIC_APM_ENVIRONMENT
+              value: pursit
+
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "500m"
+            limits:
+              memory: "1000Mi"
+              cpu: "1000m"
+
+      imagePullSecrets:
+        - name: github-container-registry
+
+      restartPolicy: Always
+      

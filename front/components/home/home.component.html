@@ -1,0 +1,76 @@
+<div class="block w-container logo-slog-img-card">
+  <div>
+    <p class="title font-title-big">Purrfect<br>Sitters</p>
+    <p class="slog font-25">Сервис заботы<br>о вашем питомце</p>
+  </div>
+  <img class="title-img" src="/icons/head-cat.png" alt="title">
+</div>
+<p class="desc">Во время отпусков, командировок или поездок к друзьям часто возникает вопрос: кто позаботится о вашем
+  питомце?<br><br>
+  <b>Purrfect Sitters</b> — сервис, который решит эту проблему.</p>
+
+<div id="sitting" class="block w-container moral-sitting-card">
+  <div style="margin-top: 32px">
+    <p class="moral-sitting-card-title font-28-bold">Передержка<br>с зоопсихологом</p>
+    <p class="moral-sitting-card-description font-16">Подготовка животного к предстоящей передержке<br>Поддержка животного в
+      случае стресса</p>
+    <button (click)="moralPetSitting()">Выбрать ситтера</button>
+  </div>
+  <img class="moral-sitting-card-icon" src="/icons/moral-pet-sitting.jpg" alt="img">
+</div>
+
+<div class="w-container" style="column-gap: 50px">
+  <div class="block h-container items-center sitting-card">
+    <div style="background-image: url('/icons/pet-sitting.jpg')"
+      class="sitting-card-icon"></div>
+    <p class="font-28-bold">Передержка</p>
+    <button (click)="petSitting()">Выбрать ситтера</button>
+  </div>
+
+  <div class="block h-container items-center sitting-card">
+    <div style="background-image: url('/icons/pet-moving.jpg')"
+      class="sitting-card-icon"></div>
+    <p class="font-28-bold">Ветеринар<br>выезд на дом</p>
+    <button (click)="petHealth()">Выбрать ситтера</button>
+  </div>
+
+  <div class="block h-container items-center sitting-card">
+    <div style="background-image: url('/icons/pet-health.jpg')"
+         class="sitting-card-icon"></div>
+    <p class="font-28-bold">Перевозка</p>
+    <button (click)="petMoving()">Выбрать ситтера</button>
+  </div>
+</div>
+
+<p class="desc">Наши специалисты всегда на связи с клиентами — посмотрите, как проходит передержка</p>
+
+<div id="player">
+  <youtube-player
+    [height]="document.getElementById('player')!.offsetWidth * 9 / 16"
+    [width]="document.getElementById('player')!.offsetWidth"
+    [videoId]="'zsWg60zQBH8'"
+    (change)="youtube($event)"></youtube-player>
+</div>
+
+<p id="faq" class="desc"><b>FAQ</b></p>
+
+<div class="block faq-card"
+     *ngFor="let faqq of faq; index as i"
+     [style.maxHeight]="!faqq.opened ? '32px' : '1000px'"
+     (click)="showFaq(i)">
+  <p class="faq-card-text" [textContent]="faqq.q"></p>
+
+  <div class="faq-open"
+       [style.transform]="!faqq.opened ? 'rotate(0deg)' : 'rotate(180deg)'">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-down-circle"
+         viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+    </svg>
+  </div>
+
+  <div>
+    <div class="line"></div>
+    <p class="faq-card-text" [textContent]="faqq.a"></p>
+  </div>
+</div>

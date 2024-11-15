@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  deploy:
+  deploy-front:
     runs-on: ubuntu-latest
 
     permissions:
@@ -17,44 +17,64 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Use Node.js 22.9.0
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22.9.0
+    - name: Prepare
+      uses: ./.github/workflows/actions/prepare_env
 
     - name: Install deps
+      working-directory: front
       run: npm install && npm install @rollup/rollup-linux-x64-gnu
 
-    - name: Build
+    - name: Build front
+      working-directory: front
       run: npm run build
 
-    - name: Log in to the Container registry
-      uses: docker/login-action@v3.1.0
+    - name: Build docker image
+      uses: ./.github/workflows/actions/build_image
       with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        image: pursit-front
+        actor: ${{ github.actor }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Extract metadata
-      id: meta
-      uses: docker/metadata-action@v5.5.1
-      with:
-        images: ghcr.io/${{ github.actor }}/pursit-ui
-
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v5.3.0
-      with:
-        context: .
-        file: ./iac/image/Dockerfile
-        push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
-
-    - name: Set the Kubernetes context
+    - name: Set kube context
       uses: azure/k8s-set-context@v4
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBESECRET }}
 
-    - name: Deploy
-      run: kubectl rollout restart deployment/pursit-ui -n pursit
+    - name: Kube rollout restart
+      run: kubectl rollout restart deployment/pursit-front -n pursit
+
+  deploy-back:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare
+        uses: ./.github/workflows/actions/prepare_env
+
+      - name: Build back
+        working-directory: back
+        run: mvn install
+
+      - name: Build docker image
+        uses: ./.github/workflows/actions/build_image
+        with:
+          image: pursit-back
+          actor: ${{ github.actor }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set kube context
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBESECRET }}
+
+      - name: Kube rollout restart
+        run: kubectl rollout restart deployment/pursit-back -n pursit

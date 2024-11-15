@@ -1,0 +1,126 @@
+:root {
+  --main-color: #ff7100;
+  --main-color-pressed: #c25600;
+  --main-color-hover: #ff8b2e;
+
+  /*-webkit-touch-callout: none;*/
+  /*-webkit-user-select: none;*/
+  /*-khtml-user-select: none;*/
+  /*-moz-user-select: none;*/
+  /*-ms-user-select: none;*/
+  /*user-select: none;*/
+}
+
+@font-face {
+  font-family: 'eRibeye';
+  src: url('/fonts/ribeye_regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'eMontserrat';
+  src: url('/fonts/montserrat.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+}
+
+button {
+  padding: 16px 32px;
+  border: none;
+  border-radius: 40px;
+  background-color: var(--main-color);
+  font-family: eMontserrat, serif;
+  font-size: 20px;
+  color: white;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background-color: var(--main-color-hover);
+}
+
+button:active {
+  background-color: var(--main-color-pressed);
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.block {
+  background-color: white;
+  box-shadow: 8px 8px 36px rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
+}
+
+.w-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.h-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-title {
+  font-family: eRibeye, serif;
+  font-size: 38px;
+  line-height: 38px;
+  color: var(--main-color);
+}
+
+.font-title-big {
+  font-family: eRibeye, serif;
+  font-size: 76px;
+  line-height: 88px;
+  color: var(--main-color);
+}
+
+.font-28-bold {
+  font-family: eMontserrat, serif;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 32px;
+}
+
+.font-25 {
+  font-family: eMontserrat, serif;
+  line-height: 30px;
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.font-16 {
+  font-family: eMontserrat, serif;
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.font-16-bold {
+  font-family: eMontserrat, serif;
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.desc {
+  font-family: eMontserrat, serif;
+  margin: 64px;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 40px;
+}

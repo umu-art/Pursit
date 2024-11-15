@@ -1,0 +1,251 @@
+openapi: 3.1.0
+
+info:
+  title: EST Back API
+  description: Все запросы от прокси к бэку
+  version: 1.0.0
+
+servers:
+  - url: 'https://pursit.ru'
+
+security:
+  - jwt: [ ]
+
+paths:
+  /backend/user/login:
+    post:
+      tags:
+        - user
+      summary: Авторизация пользователя
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthDto"
+      responses:
+        200:
+          description: Успешная авторизация
+
+  /backend/user/register:
+    post:
+      tags:
+        - user
+      summary: Регистрация пользователя
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterDto"
+      responses:
+        200:
+          description: Успешная авторизация
+
+  /backend/user/self:
+    get:
+      tags:
+        - user
+      summary: Получение информации о себе
+      operationId: getSelf
+      responses:
+        200:
+          description: Информация о себе
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+
+  /backend/user/link:
+    post:
+      tags:
+        - user
+      summary: Добавление связи с user.id rum'а
+      operationId: link
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rumId:
+                  type: string
+      responses:
+        200:
+          description: Ок
+
+  /backend/help:
+    post:
+      tags:
+        - help
+      summary: Отправка сообщения в службу поддержки
+      operationId: sendHelp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HelpDto"
+      responses:
+        200:
+          description: Сообщение отправлено
+
+  /backend/sitter/list:
+    get:
+      tags:
+        - sitters
+      summary: Получение списка ситтеров
+      operationId: getSitters
+      responses:
+        200:
+          description: Список ситтеров
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SitterDto"
+
+  /backend/sitter/request:
+    post:
+      tags:
+        - sitters
+      summary: Отправка заявки на передержку
+      operationId: sendRequest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SitterRequestDto"
+      responses:
+        200:
+          description: Заявка отправлена
+
+components:
+  schemas:
+    AuthDto:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    RegisterDto:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+
+    HelpDto:
+      type: object
+      properties:
+        email:
+          type: string
+        tg:
+          type: string
+        whatsapp:
+          type: string
+        message:
+          type: string
+
+    SitterDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          description: Имя ситтера
+          type: string
+        avatarUrl:
+          description: Ссылка на аватар
+          type: string
+        shortDescription:
+          description: Краткое описание
+          type: string
+        longDescription:
+          description: Полное описание
+          type: string
+        price:
+          description: Цена за сутки
+          type: number
+        contacts:
+          description: Контакты ситтера
+          type: string
+        photosUrls:
+          description: Ссылки на фотографии
+          type: array
+          items:
+            type: string
+        geolocation:
+          $ref: "#/components/schemas/GeolocationDto"
+
+    SitterRequestDto:
+      type: object
+      properties:
+        sitterId:
+          description: id выбранного ситтера
+          type: string
+          format: uuid
+        phone:
+          description: Номер телефона клиента
+          type: string
+        tg:
+          description: Ник в телеграме клиента
+          type: string
+        otherContact:
+          description: Другие контакты клиента
+          type: string
+        isCat:
+          description: Является ли питомец кошкой
+          type: boolean
+        isDog:
+          description: Является ли питомец собакой
+          type: boolean
+        height:
+          description: Высота питомца в холке
+          type: string
+        breed:
+          description: Порода питомца
+          type: string
+        hasVaccinations:
+          description: Наличие прививок у питомца
+          type: boolean
+        startDate:
+          description: Дата начала передержки
+          type: string
+          format: date-time
+        endDate:
+          description: Дата окончания передержки
+          type: string
+          format: date-time
+        otherMessage:
+          description: Другие пожелания клиента
+          type: string
+
+    GeolocationDto:
+      type: object
+      properties:
+        latitude:
+          description: Широта
+          type: number
+        longitude:
+          description: Долгота
+          type: number
+        name:
+          description: Название
+          type: string

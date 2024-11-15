@@ -1,0 +1,14 @@
+.app-container {
+  flex: 1;
+  min-height: 100vh;
+  width: min(95%, 1200px);
+}
+
+.app-header {
+  margin-top: 20px;
+  display: block;
+}
+
+.app-bottom {
+  display: block;
+}

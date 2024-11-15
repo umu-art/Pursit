@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pursit
+spec:
+  destination:
+    namespace: pursit
+    server: https://kubernetes.default.svc
+  source:
+    path: iac/kubernetes
+    repoURL: git@github.com:umu-art/pursit.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true

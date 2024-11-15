@@ -88,8 +88,7 @@ jobs:
 
     steps:
       - name: Install argocd
-        run: curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64;\
-          install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+        run: curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 
       - name: Argo sync
-        run: argocd --server argocd.umu-art.ru --grpc-web --auth-token ${{ secrets.ARGO_TOKEN }} app sync pursit --prune --timeout 300
+        run: argocd-linux-amd64 --server argocd.umu-art.ru --grpc-web --auth-token ${{ secrets.ARGO_TOKEN }} app sync pursit --prune --timeout 300

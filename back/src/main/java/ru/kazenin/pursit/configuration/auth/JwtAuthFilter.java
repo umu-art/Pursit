@@ -35,7 +35,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             "/backend/user/register",
             "/backend/sitter/list",
             "/backend/help",
-            "/actuator/",
+            "/actuator/health/readiness",
+            "/actuator/health/liveness",
             "/error");
 
     public static final String AUTH_COOKIE = "mur";

@@ -97,4 +97,4 @@ jobs:
         with:
           version: 2.6.7
           options:  --server argocd.umu-art.ru --grpc-web --auth-token ${{ secrets.ARGO_TOKEN }}
-          command: app wait pursit --degraded --timeout 30
+          command: app wait pursit --health --timeout 300

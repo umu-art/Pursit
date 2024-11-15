@@ -4,10 +4,10 @@ description: "Подготовка окружения для пайпы, уст�
 runs:
   using: "composite"
   steps:
-  - name: Set up Node.js 21
+  - name: Set up Node.js 22
     uses: actions/setup-node@v4.0.4
     with:
-      node-version: 21
+      node-version: 22
       cache: 'npm'
       cache-dependency-path: |
         front/package-lock.json

@@ -14,35 +14,35 @@ jobs:
       attestations: write
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Prepare
-      uses: ./.github/workflows/actions/prepare_env
+      - name: Prepare
+        uses: ./.github/workflows/actions/prepare_env
 
-    - name: Install deps
-      working-directory: front
-      run: npm install && npm install @rollup/rollup-linux-x64-gnu
+      - name: Install deps
+        working-directory: front
+        run: npm install && npm install @rollup/rollup-linux-x64-gnu
 
-    - name: Build front
-      working-directory: front
-      run: npm run build
+      - name: Build front
+        working-directory: front
+        run: npm run build
 
-    - name: Build docker image
-      uses: ./.github/workflows/actions/build_image
-      with:
-        image: pursit-front
-        actor: ${{ github.actor }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build docker image
+        uses: ./.github/workflows/actions/build_image
+        with:
+          image: pursit-front
+          actor: ${{ github.actor }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Set kube context
-      uses: azure/k8s-set-context@v4
-      with:
-        method: kubeconfig
-        kubeconfig: ${{ secrets.KUBESECRET }}
+      - name: Set kube context
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBESECRET }}
 
-    - name: Kube rollout restart
-      run: kubectl rollout restart deployment/pursit-front -n pursit
+      - name: Kube rollout restart
+        run: kubectl rollout restart deployment/pursit-front -n pursit
 
   deploy-back:
     runs-on: ubuntu-latest
@@ -87,5 +87,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install argocd
+        run: curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64;\
+          sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd;\
+          rm argocd-linux-amd64
+
       - name: Argo sync
         run: argocd --server argocd.umu-art.ru --grpc-web --auth-token ${{ secrets.ARGO_TOKEN }} app sync pursit --prune --timeout 300

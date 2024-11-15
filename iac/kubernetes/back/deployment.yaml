@@ -52,6 +52,22 @@ spec:
             - name: ELASTIC_APM_ENVIRONMENT
               value: pursit
 
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 20
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 20
+
           resources:
             requests:
               memory: "500Mi"

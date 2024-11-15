@@ -1,0 +1,12 @@
+additionalProperties:
+  artifactId: pursit-api
+  groupId: ru.kazenin
+  basePackage: ru.kazenin
+  invokerPackage: ru.kazenin
+  apiPackage: ru.kazenin.api
+  modelPackage: ru.kazenin.model
+  useTags: true
+  interfaceOnly: true
+  skipDefaultInterface: true
+  useSpringBoot3: true
+  useJakartaEe: true

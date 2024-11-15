@@ -1,0 +1,45 @@
+pursit:
+  auth:
+    jwtSecret: 'pursit2rfv34bfgu3dfb49u3gbi324fbi34g5b493ufbgu3fodj3204rfb039o23dd4irfn3g2d3f4g34fd3243rgftb'
+    jwtExpirationHours: 48
+
+spring:
+  application:
+    name: pursit
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/est-data
+    username: est-admin
+    password: wjq49t3q_i29f
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+server:
+  port: 8080
+
+logging:
+  level:
+    ru: trace
+    org:
+      springframework:
+        mail: trace
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true

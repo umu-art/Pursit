@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pursit-front
+  namespace: pursit
+spec:
+  selector:
+    app: pursit-front
+  ports:
+    - protocol: TCP
+      port: 80
+      name: http
+      targetPort: 80
+  type: ClusterIP

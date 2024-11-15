@@ -1,6 +1,6 @@
 pursit:
   auth:
-    jwtSecret: 'pursit2rfv34bfgu3dfb49u3gbi324fbi34g5b493ufbgu3fodj3204rfb039o23dd4irfn3g2d3f4g34fd3243rgftb'
+    jwtSecret: ${JWT_SECRET}
     jwtExpirationHours: 48
 
 spring:
@@ -8,14 +8,14 @@ spring:
     name: pursit
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/est-data
-    username: est-admin
-    password: wjq49t3q_i29f
+    url: jdbc:postgresql://postgres.databases.svc.cluster.local:5432/pursit
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
 
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: true
 
 server:
@@ -24,9 +24,6 @@ server:
 logging:
   level:
     ru: trace
-    org:
-      springframework:
-        mail: trace
 
 management:
   endpoints:

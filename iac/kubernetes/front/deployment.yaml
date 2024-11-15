@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pursit-front
+  namespace: pursit
+  labels:
+    app: pursit-front
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: pursit-front
+  template:
+    metadata:
+      name: pursit-front
+      labels:
+        app: pursit-front
+    spec:
+      containers:
+        - name: pursit-front
+          image: ghcr.io/umu-art/pursit-front:master
+          imagePullPolicy: Always
+
+          securityContext:
+            allowPrivilegeEscalation: false
+
+          resources:
+            requests:
+              memory: "50M"
+              cpu: "50m"
+            limits:
+              memory: "100M"
+              cpu: "100m"
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 20
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 20
+
+      imagePullSecrets:
+        - name: github-container-registry
+
+      restartPolicy: Always

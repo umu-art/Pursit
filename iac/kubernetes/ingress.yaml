@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: pursit-ui-ingress
+  name: pursit-ingress
   namespace: pursit
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-issuer
@@ -17,7 +17,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: pursit-ui
+                name: pursit-front
+                port:
+                  name: http
+          - path: /backend/
+            pathType: Prefix
+            backend:
+              service:
+                name: pursit-back
                 port:
                   name: http
 
@@ -28,7 +35,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: pursit-ui
+                name: pursit-front
+                port:
+                  name: http
+          - path: /backend/
+            pathType: Prefix
+            backend:
+              service:
+                name: pursit-back
                 port:
                   name: http
   tls:

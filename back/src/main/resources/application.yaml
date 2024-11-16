@@ -3,6 +3,14 @@ pursit:
     jwtSecret: ${JWT_SECRET}
     jwtExpirationHours: 48
 
+telegram-bot:
+  token: ${TELEGRAM_BOT_TOKEN}
+  username: ${TELEGRAM_BOT_USERNAME}
+  master-chat-id: -1002396511237
+  help-topic-id: 9
+  users-topic-id: 5
+  sitters-request-topic-id: 2
+
 spring:
   application:
     name: pursit

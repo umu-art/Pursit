@@ -12,6 +12,7 @@ import ru.kazenin.model.AuthDto;
 import ru.kazenin.model.LinkRequest;
 import ru.kazenin.model.RegisterDto;
 import ru.kazenin.model.UserDto;
+import ru.kazenin.pursit.configuration.TelegramBot;
 import ru.kazenin.pursit.domain.UserEntity;
 import ru.kazenin.pursit.exception.BadRequestException;
 import ru.kazenin.pursit.service.UserService;
@@ -27,10 +28,12 @@ public class UserController implements UserApi {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final UserService userService;
+    private final TelegramBot telegramBot;
 
     @Override
     public ResponseEntity<Void> register(RegisterDto registerDto) {
         log.debug("register: {}", registerDto);
+
         if (userService.existsByUsername(registerDto.getUsername())) {
             throw new BadRequestException("Пользователь с таким никнеймом уже существует");
         }
@@ -51,6 +54,8 @@ public class UserController implements UserApi {
 
         var token = jwtService.generateJwtToken(authentication);
 
+        telegramBot.sendUsers("Новый пользователь: " + registerDto.getEmail());
+
         return ResponseEntity.ok()
                 .header("Set-Cookie", AUTH_COOKIE + "=" + token + "; Path=/; HttpOnly; SameSite=Strict")
                 .build();
@@ -69,6 +74,8 @@ public class UserController implements UserApi {
                 new UsernamePasswordAuthenticationToken(user.get().getUsername(), authDto.getPassword()));
 
         var token = jwtService.generateJwtToken(authentication);
+
+        telegramBot.sendUsers("Вход: " + authDto.getEmail());
 
         return ResponseEntity.ok()
                 .header("Set-Cookie", AUTH_COOKIE + "=" + token + "; Path=/; HttpOnly; SameSite=Strict")

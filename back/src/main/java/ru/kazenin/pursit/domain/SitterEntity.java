@@ -44,6 +44,6 @@ public class SitterEntity {
     private List<SitterPhotoEntity> photosUrls;
 
     @OneToOne(mappedBy = "sitter", fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
+    @Fetch(FetchMode.JOIN)
     private SitterGeolocationEntity geolocation;
 }

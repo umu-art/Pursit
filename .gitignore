@@ -72,4 +72,4 @@ build/
 
 ### VS Code ###
 .vscode/
-
+iac/kubernetes/secret

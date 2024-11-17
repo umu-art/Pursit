@@ -10,12 +10,12 @@
 
     <div class="form-element">
       <label class="font-16" for="email">Ваш email</label>
-      <input class="font-16" type="email" id="email" [(ngModel)]="email">
+      <input class="font-16" type="email" id="email" autocomplete="username" [(ngModel)]="email">
     </div>
 
     <div class="form-element">
       <label class="font-16" for="password">Пароль</label>
-      <input class="font-16" type="password" id="password" [(ngModel)]="password">
+      <input class="font-16" type="password" id="password" autocomplete="current-password" [(ngModel)]="password">
     </div>
 
     <button (click)="login()"

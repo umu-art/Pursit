@@ -42,10 +42,9 @@ declare -a pids
   echo "Generating js API client"
   java -jar ./build/openapi-generator-cli.jar generate\
     -i ./api.yaml\
-    -g javascript\
-    -o ./build/pursit-api-js\
-    -c ./config/javascript.yaml
-  (cd build/pursit-api-js && npm install && npm run build)
+    -g typescript-angular\
+    -o ../front/pursit-api-ts
+#  (cd build/pursit-api-ts && npm install && npm run build)
   echo "js API client build completed"
 } & pids+=($!)
 

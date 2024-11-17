@@ -153,7 +153,7 @@ components:
     HelpDto:
       type: object
       properties:
-        email:
+        phone:
           type: string
         tg:
           type: string
@@ -168,6 +168,8 @@ components:
         id:
           type: string
           format: uuid
+        type:
+          $ref: "#/components/schemas/SitterType"
         name:
           description: Имя ситтера
           type: string
@@ -249,3 +251,11 @@ components:
         name:
           description: Название
           type: string
+
+    SitterType:
+      type: string
+      enum:
+        - moral-pet-sitting
+        - pet-sitting
+        - pet-health
+        - pet-moving

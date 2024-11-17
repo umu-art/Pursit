@@ -9,7 +9,7 @@
     <a href="/home#sitting"><p class="sel m-8 font-16-bold text-center">Услуги</p></a>
     <a href="/home#faq"><p class="sel m-8 font-16-bold text-center">FAQ</p></a>
     <a href="/home#contacts"><p class="sel m-40 font-16-bold text-center">Контакты</p></a>
-    <ng-container *ngIf="!userName">
+    <ng-container *ngIf="!username">
       <button
         class="login m-16"
         (click)="login.emit()">Вход
@@ -19,8 +19,8 @@
         (click)="register.emit()">Регистрация
       </button>
     </ng-container>
-    <ng-container *ngIf="userName">
-      <p class="m-16 font-16-bold text-center">Здравствуйте, {{ userName }}</p>
+    <ng-container *ngIf="username">
+      <p class="m-16 font-16-bold text-center">Здравствуйте, {{ username }}</p>
       <button
         class="login"
         (click)="logout()">Выход

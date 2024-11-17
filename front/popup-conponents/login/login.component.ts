@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UserService} from '../../pursit-api-ts';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,21 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
+  constructor(private userService: UserService) {
+  }
+
   login() {
-    this.finish.emit();
+    this.userService.login({
+      email: this.email,
+      password: this.password
+    }).subscribe({
+      next: () => {
+        console.log('Успеха');
+        this.finish.emit();
+      },
+      error: resp => {
+        console.log(resp)
+      }
+    });
   }
 }

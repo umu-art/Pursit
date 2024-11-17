@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {UserService} from '../../pursit-api-ts';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,26 @@ export class RegisterComponent {
   password: string = '';
   repeatPassword: string = '';
 
+  constructor(private userService: UserService) {
+  }
+
   register() {
-    this.finish.emit();
+    if (this.password !== this.repeatPassword) {
+      return
+    }
+
+    this.userService.register({
+      username: this.username,
+      email: this.email,
+      password: this.password,
+    }).subscribe({
+      next: () => {
+        console.log('Успеха');
+        this.finish.emit();
+      },
+      error: resp => {
+        console.log(resp)
+      }
+    });
   }
 }

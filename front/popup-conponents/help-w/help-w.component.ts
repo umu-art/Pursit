@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HelpService} from '../../pursit-api-ts';
 
 @Component({
   selector: 'app-help-w',
@@ -19,7 +20,23 @@ export class HelpWComponent {
   tg: string = '';
   whatsapp: string = '';
 
+  constructor(private helpService: HelpService) {
+  }
+
   send() {
-    this.finish.emit();
+    this.helpService.sendHelp({
+      message: this.text,
+      phone: this.phone,
+      tg: this.tg,
+      whatsapp: this.whatsapp
+    }).subscribe({
+      next: () => {
+        console.log('Успеха');
+        this.finish.emit();
+      },
+      error: resp => {
+        console.log(resp)
+      }
+    });
   }
 }

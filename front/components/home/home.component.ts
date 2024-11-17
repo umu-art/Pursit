@@ -2,7 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {ApmService} from '../../lib/apm.service';
 import {YoutubePlayerComponent} from 'ngx-youtube-player';
-import {NgForOf} from '@angular/common';
+import {NgClass, NgForOf} from '@angular/common';
 
 class FaqQuestion {
   q: string = ''
@@ -15,7 +15,8 @@ class FaqQuestion {
   standalone: true,
   imports: [
     YoutubePlayerComponent,
-    NgForOf
+    NgForOf,
+    NgClass
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

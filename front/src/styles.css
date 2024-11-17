@@ -1,5 +1,6 @@
 :root {
   --main-color: #ff7100;
+  --secondary-color: #027D8D;
   --main-color-pressed: #c25600;
   --main-color-hover: #ff8b2e;
 
@@ -25,6 +26,11 @@ body {
   margin: 0;
 }
 
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
 button {
   padding: 16px 32px;
   border: none;
@@ -34,6 +40,15 @@ button {
   font-size: 20px;
   color: white;
   transition: all 0.2s;
+}
+
+input, textarea {
+  padding: 16px 32px;
+  border: none;
+  border-radius: 40px;
+  box-shadow: 8px 8px 36px rgba(0, 0, 0, 0.2);
+  font-family: eMontserrat, serif;
+  font-size: 20px;
 }
 
 button:hover {
@@ -87,6 +102,13 @@ a {
   font-size: 76px;
   line-height: 88px;
   color: var(--main-color);
+}
+
+.font-50-bold {
+  font-family: eMontserrat, serif;
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 50px;
 }
 
 .font-28-bold {

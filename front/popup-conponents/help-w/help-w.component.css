@@ -1,0 +1,59 @@
+.header-container {
+  background-color: var(--secondary-color);
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+.help-cat {
+  margin-left: 72px;
+  margin-top: 72px;
+  width: 400px;
+}
+
+.header-container p {
+  color: white;
+}
+
+.title {
+  margin: 90px 72px 0 72px;
+}
+
+.slog {
+  margin: 20px auto 42px auto;
+}
+
+.body-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  background-image: url("/icons/laps.png");
+  background-size: cover;
+  background-position: top;
+
+  padding-left: 144px;
+  padding-right: 144px;
+}
+
+.send {
+  margin: 32px 0 32px 0;
+}
+
+.form-element {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-element label {
+  margin-bottom: 8px;
+}
+
+.send-button {
+  margin: 32px 0 32px 0;
+}
+
+textarea {
+  resize: none;
+}

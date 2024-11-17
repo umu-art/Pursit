@@ -6,8 +6,25 @@
     </div>
   </a>
   <div class="w-container items-center">
-    <a href="/home#sitting"><p class="sel font-16-bold text-center">Услуги</p></a>
-    <a href="/home#faq"><p class="sel font-16-bold text-center">FAQ</p></a>
-    <a href="/home#contacts"><p class="sel font-16-bold text-center">Контакты</p></a>
+    <a href="/home#sitting"><p class="sel m-16 font-16-bold text-center">Услуги</p></a>
+    <a href="/home#faq"><p class="sel m-16 font-16-bold text-center">FAQ</p></a>
+    <a href="/home#contacts"><p class="sel m-50 font-16-bold text-center">Контакты</p></a>
+    <ng-container *ngIf="!userName">
+      <button
+        class="login m-16"
+        (click)="login.emit()">Вход
+      </button>
+      <button
+        class="register"
+        (click)="register.emit()">Регистрация
+      </button>
+    </ng-container>
+    <ng-container *ngIf="userName">
+      <p class="m-16 font-16-bold text-center">Здравствуйте, {{ userName }}</p>
+      <button
+        class="login"
+        (click)="logout()">Выход
+      </button>
+    </ng-container>
   </div>
 </div>

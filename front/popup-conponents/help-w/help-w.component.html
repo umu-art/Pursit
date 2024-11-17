@@ -1,0 +1,32 @@
+<div class="block">
+  <div (click)="finish.emit()"
+       class="header-container w-container">
+    <img src="/icons/help-cat.png" alt="help-cat" class="help-cat">
+    <p class="title font-50-bold">Вам нужна<br>помощь?</p>
+  </div>
+
+  <div class="body-container h-container">
+    <p class="desc send"><b>Задайте свой вопрос</b></p>
+
+    <div class="form-element">
+      <label class="font-16" for="text">Опишите проблему</label>
+      <textarea class="font-16" rows="5" id="text" [(ngModel)]="text"></textarea>
+    </div>
+
+    <div class="form-element">
+      <label class="font-16" for="phone">Оставьте свои контакты, чтобы мы могли с вами связаться</label>
+      <input class="font-16" type="tel" id="phone" [(ngModel)]="phone" placeholder="Ваш телефон">
+    </div>
+
+    <div class="form-element">
+      <input class="font-16" type="text" id="tg" [(ngModel)]="tg" placeholder="Ваш телеграм">
+    </div>
+
+    <div class="form-element">
+      <input class="font-16" type="text" id="whatsapp" [(ngModel)]="whatsapp" placeholder="Ваш whatsapp">
+    </div>
+
+    <button (click)="send()"
+            class="send-button">Отправить</button>
+  </div>
+</div>

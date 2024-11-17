@@ -10,7 +10,45 @@
 }
 
 .sel {
-  width: 64px;
+  width: 80px;
+}
+
+.m-16 {
   margin: 0 16px 0 0;
 }
 
+.m-50 {
+  margin: 0 50px 0 0;
+}
+
+.login{
+  font-weight: 600;
+  font-size: 16px;
+  background-color: #C1D7ED;
+  color: black;
+}
+
+.login:hover{
+  background-color: #A9C9E3;
+  color: black;
+}
+
+.login:active{
+  background-color: #8AB8D6;
+}
+
+.register{
+  font-weight: 600;
+  font-size: 16px;
+  background-color: #FAD7A7;
+  color: black;
+}
+
+.register:hover{
+  background-color: #F0C98E;
+  color: black;
+}
+
+.register:active{
+  background-color: #E0B16F;
+}

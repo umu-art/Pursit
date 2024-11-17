@@ -56,7 +56,7 @@
 
 <div class="block faq-card"
      *ngFor="let faqq of faq; index as i"
-     [style.maxHeight]="!faqq.opened ? '32px' : '1000px'"
+     [ngClass]="{'faq-card-opened': faqq.opened}"
      (click)="showFaq(i)">
   <p class="faq-card-text" [textContent]="faqq.q"></p>
 

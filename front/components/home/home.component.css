@@ -71,8 +71,15 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 16px;
-  transition: all 0.2s;
   overflow: hidden;
+
+  max-height: 32px;
+  transition: max-height 0.3s;
+}
+
+.faq-card-opened{
+  max-height: 100vh;
+  transition: max-height 1s;
 }
 
 .faq-card-text {
@@ -84,7 +91,7 @@
   position: absolute;
   right: 48px;
   top: 24px;
-  transition: all 0.2s;
+  transition: transform 0.2s;
 }
 
 .line {

@@ -1,0 +1,24 @@
+<div class="block">
+  <div (click)="finish.emit()"
+       class="header-container h-container">
+    <p class="title font-title-big">Purrfect Sitters</p>
+    <p class="slog font-25">Сервис заботы о вашем питомце</p>
+  </div>
+
+  <div class="body-container h-container">
+    <p class="desc auth"><b>Авторизация</b></p>
+
+    <div class="form-element">
+      <label class="font-16" for="email">Ваш email</label>
+      <input class="font-16" type="email" id="email" [(ngModel)]="email">
+    </div>
+
+    <div class="form-element">
+      <label class="font-16" for="password">Пароль</label>
+      <input class="font-16" type="password" id="password" [(ngModel)]="password">
+    </div>
+
+    <button (click)="login()"
+            class="auth-button">Войти</button>
+  </div>
+</div>

@@ -10,15 +10,19 @@
 }
 
 .sel {
-  width: 80px;
+  width: 60px;
+}
+
+.m-8 {
+  margin: 0 8px 0 0;
 }
 
 .m-16 {
   margin: 0 16px 0 0;
 }
 
-.m-50 {
-  margin: 0 50px 0 0;
+.m-40 {
+  margin: 0 40px 0 0;
 }
 
 .login{

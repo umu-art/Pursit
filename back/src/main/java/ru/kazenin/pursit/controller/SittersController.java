@@ -8,9 +8,11 @@ import ru.kazenin.api.SittersApi;
 import ru.kazenin.model.SitterDto;
 import ru.kazenin.model.SitterRequestDto;
 import ru.kazenin.pursit.configuration.TelegramBot;
+import ru.kazenin.pursit.jpa.SitterJpa;
 import ru.kazenin.pursit.service.SittersService;
 
 import java.util.List;
+import java.util.UUID;
 
 import static ru.kazenin.pursit.configuration.auth.JwtAuthFilter.getPerformer;
 
@@ -21,6 +23,7 @@ public class SittersController implements SittersApi {
 
     private final TelegramBot telegramBot;
     private final SittersService sittersService;
+    private final SitterJpa sitterJpa;
 
     @Override
     public ResponseEntity<List<SitterDto>> getSitters() {
@@ -29,24 +32,31 @@ public class SittersController implements SittersApi {
     }
 
     @Override
+    public ResponseEntity<List<SitterDto>> getSittersByIds(List<UUID> sittersIds) {
+        return ResponseEntity.ok(sittersService.getByIds(sittersIds));
+    }
+
+    @Override
     public ResponseEntity<Void> sendRequest(SitterRequestDto sitterRequestDto) {
         log.info("sendRequest: {}", sitterRequestDto);
         StringBuilder text = new StringBuilder("Запрос на передержку:").append("\n");
 
-        var sitter = sittersService.getById(sitterRequestDto.getSitterId());
         var user = getPerformer();
-
         text
                 .append("Заказчик: ")
                 .append(user.getUsername())
                 .append(" ")
                 .append(user.getEmail())
-                .append("\n")
-                .append("Ситтер: ")
-                .append(sitter.getName())
-                .append(" ")
-                .append(sitter.getContacts())
                 .append("\n");
+
+        var sitters = sitterJpa.findAllByIdIn(sitterRequestDto.getSitterIds());
+        sitters.forEach(sitter ->
+                text
+                        .append("Ситтер: ")
+                        .append(sitter.getName())
+                        .append(" ")
+                        .append(sitter.getContacts())
+                        .append("\n"));
 
 
         for (var field : SitterRequestDto.class.getDeclaredFields()) {

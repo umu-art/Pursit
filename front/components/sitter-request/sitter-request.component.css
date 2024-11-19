@@ -1,0 +1,58 @@
+.main-form {
+  flex: 2;
+}
+
+.main-sitters {
+  justify-content: start;
+  flex: 1;
+  margin-left: 42px;
+}
+
+.form-radio-btn {
+  display: inline-block;
+}
+
+.form-radio-btn input[type=radio] {
+  display: none;
+}
+
+.form-radio-btn label {
+  display: inline-block;
+  cursor: pointer;
+
+  margin: 16px 0;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 40px;
+  box-shadow: 8px 8px 36px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+}
+
+.form-radio-btn input[type=radio]:checked + label {
+  background: var(--main-color);
+  color: white;
+}
+
+.form-radio-btn label:hover {
+  background: var(--main-color-hover);
+  color: white;
+}
+
+.form-radio-group {
+  justify-content: left;
+  align-items: center;
+  gap: 20px
+}
+
+input, textarea {
+  margin: 16px 0;
+}
+
+.sitter-card {
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.m-16 {
+  margin: 20px 0 16px 0;
+}

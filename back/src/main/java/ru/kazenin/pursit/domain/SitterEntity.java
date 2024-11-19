@@ -2,6 +2,8 @@ package ru.kazenin.pursit.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -10,6 +12,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import ru.kazenin.model.SitterType;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +26,10 @@ public class SitterEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private SitterType type;
 
     @Column(name = "avatar_url", nullable = false)
     private String avatarUrl;
@@ -38,6 +45,18 @@ public class SitterEntity {
 
     @Column(name = "contacts", nullable = false)
     private String contacts;
+
+    @Column(name = "experience", nullable = false)
+    private int experience;
+
+    @Column(name = "ready_come_itself", nullable = false)
+    private boolean readyComeItself;
+
+    @Column(name = "takes_cats", nullable = false)
+    private boolean takesCats;
+
+    @Column(name = "takes_dogs", nullable = false)
+    private boolean takesDogs;
 
     @OneToMany(mappedBy = "sitter", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)

@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgIf} from '@angular/common';
 import {UserService} from '../../pursit-api-ts';
+import {PopupContainerComponent} from '../popup-container/popup-container.component';
 
 @Component({
   selector: 'app-header',
@@ -8,20 +9,23 @@ import {UserService} from '../../pursit-api-ts';
   imports: [
     NgIf
   ],
+  providers: [PopupContainerComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  @Output() login: EventEmitter<void> = new EventEmitter();
-  @Output() register: EventEmitter<void> = new EventEmitter();
-
   username: string | undefined = undefined;
 
-  constructor(userService: UserService) {
-    userService.getSelf().subscribe({
-      next: user => this.username = user.username,
-      error: () => this.username = undefined
-    });
+  constructor(
+    protected popup: PopupContainerComponent,
+    userService: UserService) {
+
+    setInterval(() => {
+      userService.getSelf().subscribe({
+        next: user => this.username = user.username,
+        error: () => this.username = undefined
+      });
+    }, 2000);
   }
 
   logout() {

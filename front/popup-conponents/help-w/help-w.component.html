@@ -1,5 +1,5 @@
 <div class="block">
-  <div (click)="finish.emit()"
+  <div (click)="popup.close()"
        class="header-container w-container">
     <img src="/icons/help-cat.png" alt="help-cat" class="help-cat">
     <p class="title font-50-bold">Вам нужна<br>помощь?</p>
@@ -27,6 +27,7 @@
     </div>
 
     <button (click)="send()"
-            class="send-button">Отправить</button>
+            class="send-button">Отправить
+    </button>
   </div>
 </div>

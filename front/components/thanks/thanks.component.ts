@@ -2,13 +2,13 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-moral-pet-sitting',
+  selector: 'app-thanks',
   standalone: true,
   imports: [],
-  templateUrl: './moral-pet-sitting.component.html',
-  styleUrl: './moral-pet-sitting.component.css'
+  templateUrl: './thanks.component.html',
+  styleUrl: './thanks.component.css'
 })
-export class MoralPetSittingComponent {
+export class ThanksComponent {
 
   constructor(private router: Router) {
   }

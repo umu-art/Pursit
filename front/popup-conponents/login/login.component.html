@@ -1,24 +1,34 @@
 <div class="block">
-  <div (click)="finish.emit()"
+  <div (click)="popup.close()"
        class="header-container h-container">
     <p class="title font-title-big">Purrfect Sitters</p>
     <p class="slog font-25">Сервис заботы о вашем питомце</p>
   </div>
 
-  <div class="body-container h-container">
+  <div class="body-container h-container" [formGroup]="form">
     <p class="desc auth"><b>Авторизация</b></p>
 
     <div class="form-element">
       <label class="font-16" for="email">Ваш email</label>
-      <input class="font-16" type="email" id="email" autocomplete="username" [(ngModel)]="email">
+      <input class="font-16"
+             type="email"
+             id="email"
+             autocomplete="username"
+             [style.background-color]="this.form.get('email')?.dirty && this.form.get('email')?.invalid ? 'rgb(255, 180, 180)' : null"
+             formControlName="email">
     </div>
 
     <div class="form-element">
       <label class="font-16" for="password">Пароль</label>
-      <input class="font-16" type="password" id="password" autocomplete="current-password" [(ngModel)]="password">
+      <input class="font-16"
+             type="password"
+             id="password"
+             autocomplete="current-password"
+             formControlName="password">
     </div>
 
     <button (click)="login()"
-            class="auth-button">Войти</button>
+            class="auth-button">Войти
+    </button>
   </div>
 </div>

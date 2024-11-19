@@ -89,6 +89,31 @@ paths:
         200:
           description: Сообщение отправлено
 
+  /backend/sitter:
+    get:
+      tags:
+        - sitters
+      summary: Получение ситтера по id
+      operationId: getSittersByIds
+      parameters:
+        - name: sittersIds
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+      responses:
+        200:
+          description: Ситтер
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SitterDto"
+
   /backend/sitter/list:
     get:
       tags:
@@ -185,48 +210,47 @@ components:
         price:
           description: Цена за сутки
           type: number
-        contacts:
-          description: Контакты ситтера
-          type: string
+        experience:
+          description: Стаж ситтера
+          type: number
         photosUrls:
           description: Ссылки на фотографии
           type: array
           items:
             type: string
+        readyComeItself:
+          description: Готов сам приехать
+          type: boolean
+        takesCats:
+          type: boolean
+        takesDogs:
+          type: boolean
         geolocation:
           $ref: "#/components/schemas/GeolocationDto"
 
     SitterRequestDto:
       type: object
       properties:
-        sitterId:
-          description: id выбранного ситтера
+        sitterIds:
+          description: id выбранных ситтеров
+          type: array
+          items:
+            type: string
+            format: uuid
+        fullName:
+          description: Имя владельца
           type: string
-          format: uuid
         phone:
           description: Номер телефона клиента
+          type: string
+        email:
+          description: Почта клиента
           type: string
         tg:
           description: Ник в телеграме клиента
           type: string
-        otherContact:
-          description: Другие контакты клиента
-          type: string
-        isCat:
-          description: Является ли питомец кошкой
-          type: boolean
-        isDog:
-          description: Является ли питомец собакой
-          type: boolean
-        height:
-          description: Высота питомца в холке
-          type: string
-        breed:
-          description: Порода питомца
-          type: string
-        hasVaccinations:
-          description: Наличие прививок у питомца
-          type: boolean
+        reportsTarget:
+          $ref: "#/components/schemas/ReportsTarget"
         startDate:
           description: Дата начала передержки
           type: string
@@ -235,9 +259,40 @@ components:
           description: Дата окончания передержки
           type: string
           format: date-time
+        petName:
+          description: Имя питомца
+          type: string
+        isCat:
+          description: Является ли питомец кошкой, false - собака
+          type: boolean
+        breed:
+          description: Порода питомца
+          type: string
+        isMale:
+          description: Является ли питомец мальчиком, false - девочкой
+          type: boolean
+        height:
+          description: Высота питомца в холке
+          type: string
+        hasVaccinations:
+          description: Наличие прививок у питомца
+          type: boolean
         otherMessage:
           description: Другие пожелания клиента
           type: string
+        needTake:
+          description: Вашего питомца забрать или вы привезете его самостоятельно?
+          type: boolean
+        addressTake:
+          description: Укажите адрес откуда забрать питомца
+          type: string
+
+    ReportsTarget:
+      type: string
+      enum:
+        - tg
+        - whatsapp
+        - email
 
     GeolocationDto:
       type: object

@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserService} from '../../pursit-api-ts';
+import {PopupContainerComponent} from '../../components/popup-container/popup-container.component';
+import {ErrorMessagerComponent} from '../../components/error-messager/error-messager.component';
 
 @Component({
   selector: 'app-login',
@@ -9,29 +11,51 @@ import {UserService} from '../../pursit-api-ts';
     ReactiveFormsModule,
     FormsModule
   ],
+  providers: [ErrorMessagerComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  @Output() finish = new EventEmitter<void>();
+  form: FormGroup;
 
-  email: string = '';
-  password: string = '';
+  constructor(
+    protected popup: PopupContainerComponent,
+    private errorMessager: ErrorMessagerComponent,
+    private userService: UserService,
+    fb: FormBuilder) {
 
-  constructor(private userService: UserService) {
+    this.form = fb.group({
+      email: ['',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+      password: ['',
+        [
+          Validators.required
+        ],
+      ],
+    });
   }
 
   login() {
+    console.log(this.form);
+    if (!this.form.valid) {
+      this.errorMessager.showErrorMessage('Некорректно заполнены поля!');
+      return;
+    }
+
     this.userService.login({
-      email: this.email,
-      password: this.password
+      email: this.form.get('email')?.value,
+      password: this.form.get('password')?.value
     }).subscribe({
       next: () => {
         console.log('Успеха');
-        this.finish.emit();
+        this.popup.close();
       },
       error: resp => {
-        console.log(resp)
+        this.errorMessager.showErrorMessage(resp.error);
       }
     });
   }

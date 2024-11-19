@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HelpService} from '../../pursit-api-ts';
+import {PopupContainerComponent} from '../../components/popup-container/popup-container.component';
+import {ErrorMessagerComponent} from '../../components/error-messager/error-messager.component';
 
 @Component({
   selector: 'app-help-w',
@@ -9,18 +11,20 @@ import {HelpService} from '../../pursit-api-ts';
     ReactiveFormsModule,
     FormsModule
   ],
+  providers: [ErrorMessagerComponent],
   templateUrl: './help-w.component.html',
   styleUrl: './help-w.component.css'
 })
 export class HelpWComponent {
-  @Output() finish = new EventEmitter<void>();
-
   text: string = '';
   phone: string = '';
   tg: string = '';
   whatsapp: string = '';
 
-  constructor(private helpService: HelpService) {
+  constructor(
+    protected popup: PopupContainerComponent,
+    private errorMessager: ErrorMessagerComponent,
+    private helpService: HelpService) {
   }
 
   send() {
@@ -32,10 +36,10 @@ export class HelpWComponent {
     }).subscribe({
       next: () => {
         console.log('Успеха');
-        this.finish.emit();
+        this.popup.close()
       },
       error: resp => {
-        console.log(resp)
+        this.errorMessager.showErrorMessage(resp.error);
       }
     });
   }

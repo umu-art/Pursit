@@ -1,0 +1,7 @@
+{
+  "/backend": {
+    "target": "https://pursit.ru",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

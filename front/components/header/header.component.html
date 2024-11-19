@@ -12,11 +12,11 @@
     <ng-container *ngIf="!username">
       <button
         class="login m-16"
-        (click)="login.emit()">Вход
+        (click)="popup.login()">Вход
       </button>
       <button
         class="register"
-        (click)="register.emit()">Регистрация
+        (click)="popup.register()">Регистрация
       </button>
     </ng-container>
     <ng-container *ngIf="username">

@@ -9,5 +9,5 @@ public interface SittersService {
 
     List<SitterDto> getAll();
 
-    SitterDto getById(UUID sitterId);
+    List<SitterDto> getByIds(List<UUID> sittersIds);
 }

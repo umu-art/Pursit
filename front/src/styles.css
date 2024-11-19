@@ -51,6 +51,10 @@ input, textarea {
   font-size: 20px;
 }
 
+textarea {
+  resize: none;
+}
+
 button:hover {
   background-color: var(--main-color-hover);
 }
@@ -132,11 +136,27 @@ a {
   font-weight: 300;
 }
 
+.font-12 {
+  font-family: eMontserrat, serif;
+  line-height: 14px;
+  font-size: 12px;
+  font-weight: 300;
+}
+
 .font-16-bold {
   font-family: eMontserrat, serif;
   line-height: 20px;
   font-size: 16px;
   font-weight: 500;
+}
+
+.desc-low {
+  font-family: eMontserrat, serif;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: 300;
+  line-height: 20px;
+  font-size: 16px;
 }
 
 .desc {

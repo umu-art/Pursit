@@ -2,7 +2,7 @@ import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
-import {ApiModule} from '../../pursit-api-ts';
+import {ApiModule, BASE_PATH} from '../../pursit-api-ts';
 import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
@@ -11,5 +11,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(ApiModule),
+    {provide: BASE_PATH, useValue: window.location.origin},
   ]
 };

@@ -1,0 +1,192 @@
+<p class="font-28-bold">Заявка на {{ type }}</p>
+<div class="w-container">
+  <div class="main-form h-container" [formGroup]="form">
+    <p class="font-25"><b>Данные о Вас:</b></p>
+
+    <input class="font-16"
+           type="text"
+           placeholder="Фамилия Имя и Отчество*"
+           [style.background-color]="this.form.get('fullName')?.dirty && this.form.get('fullName')?.invalid ? 'rgb(255, 180, 180)' : null"
+           formControlName="fullName">
+
+    <input class="font-16"
+           type="tel"
+           placeholder="Ваш телефон*"
+           [style.background-color]="this.form.get('phone')?.dirty && this.form.get('phone')?.invalid ? 'rgb(255, 180, 180)' : null"
+           formControlName="phone">
+
+    <input class="font-16"
+           type="tel"
+           [value]="user.email"
+           readonly>
+
+    <input class="font-16"
+           type="text"
+           placeholder="Ваш телеграм"
+           [style.background-color]="this.form.get('tg')?.dirty && this.form.get('tg')?.invalid ? 'rgb(255, 180, 180)' : null"
+           formControlName="tg">
+
+    <p class="desc-low">Где вам удобно получать отчеты?</p>
+
+    <div class="form-radio-group w-container">
+      <div class="form-radio-btn">
+        <input id="reportsTarget-tg" type="radio" formControlName="reportsTarget" [value]="ReportsTarget.Tg">
+        <label class="font-16" for="reportsTarget-tg">Телеграм</label>
+      </div>
+
+      <div class="form-radio-btn">
+        <input id="reportsTarget-whatsapp" type="radio" formControlName="reportsTarget"
+               [value]="ReportsTarget.Whatsapp">
+        <label class="font-16" for="reportsTarget-whatsapp">WhatsApp</label>
+      </div>
+
+      <div class="form-radio-btn">
+        <input id="reportsTarget-email" type="radio" formControlName="reportsTarget" [value]="ReportsTarget.Email">
+        <label class="font-16" for="reportsTarget-email">E-mail</label>
+      </div>
+    </div>
+
+    <p class="desc-low">Выберите даты передержки:</p>
+    <div class="w-container form-radio-group">
+      <p class="font-16">с</p>
+
+      <input class="font-16"
+             type="date"
+             value="2024-09-13"
+             [style.background-color]="this.form.get('startDate')?.dirty && this.form.get('startDate')?.invalid ? 'rgb(255, 180, 180)' : null"
+             formControlName="startDate">
+
+      <p class="font-16">по</p>
+
+      <input class="font-16"
+             type="date"
+             value="2024-09-13"
+             [style.background-color]="this.form.get('endDate')?.dirty && this.form.get('endDate')?.invalid ? 'rgb(255, 180, 180)' : null"
+             formControlName="endDate">
+    </div>
+
+    <p class="desc-low">Данные о вашем питомце:</p>
+
+    <input class="font-16"
+           type="text"
+           placeholder="Как зовут вашего питомца?*"
+           [style.background-color]="this.form.get('petName')?.dirty && this.form.get('petName')?.invalid ? 'rgb(255, 180, 180)' : null"
+           formControlName="petName">
+
+    <p class="desc-low">Кто он?</p>
+
+    <div class="form-radio-group w-container">
+      <div class="form-radio-btn">
+        <input id="is-cat" type="radio" formControlName="isCat" [value]="true">
+        <label class="font-16" for="is-cat">Кот</label>
+      </div>
+
+      <div class="form-radio-btn">
+        <input id="is-dog" type="radio" formControlName="isCat" [value]="false">
+        <label class="font-16" for="is-dog">Собака</label>
+      </div>
+    </div>
+
+    <input class="font-16"
+           type="text"
+           placeholder="Какая порода?*"
+           [style.background-color]="this.form.get('breed')?.dirty && this.form.get('breed')?.invalid ? 'rgb(255, 180, 180)' : null"
+           formControlName="breed">
+
+    <p class="desc-low">Какого он пола?</p>
+
+    <div class="form-radio-group w-container">
+      <div class="form-radio-btn">
+        <input id="is-male" type="radio" formControlName="isMale" [value]="true">
+        <label class="font-16" for="is-male">Мальчик</label>
+      </div>
+
+      <div class="form-radio-btn">
+        <input id="is-female" type="radio" formControlName="isMale" [value]="false">
+        <label class="font-16" for="is-female">Девочка</label>
+      </div>
+    </div>
+
+    <input class="font-16"
+           type="text"
+           placeholder="Какая высота питомца в холке?*"
+           [style.background-color]="this.form.get('height')?.dirty && this.form.get('height')?.invalid ? 'rgb(255, 180, 180)' : null"
+           formControlName="height">
+
+    <p class="desc-low">У вашего питомца есть прививочный сертификат?</p>
+
+    <div class="form-radio-group w-container">
+      <div class="form-radio-btn">
+        <input id="has-vaccinations" type="radio" formControlName="hasVaccinations" [value]="true">
+        <label class="font-16" for="has-vaccinations">Да</label>
+      </div>
+
+      <div class="form-radio-btn">
+        <input id="has-no-vaccinations" type="radio" formControlName="hasVaccinations" [value]="false">
+        <label class="font-16" for="has-no-vaccinations">Нет</label>
+      </div>
+    </div>
+
+    <p class="desc-low">Расскажите о своем питомце все, что может помочь ситтеру сделать передержку комфортной:</p>
+
+    <textarea
+      class="font-16"
+      rows="5"
+      placeholder="Как ваш питомец ладит с другими животными? В какое время ваш питомец привык гулять? Как ваш питомец реагирует на людей и животных на улице во время прогулки?"
+      [style.background-color]="this.form.get('otherMessage')?.dirty && this.form.get('otherMessage')?.invalid ? 'rgb(255, 180, 180)' : null"
+      formControlName="otherMessage"></textarea>
+
+    <p class="desc-low">Вашего питомца забрать или вы привезете его самостоятельно?</p>
+
+    <div class="form-radio-group w-container">
+      <div class="form-radio-btn">
+        <input id="need-take" type="radio" formControlName="needTake" [value]="true">
+        <label class="font-16" for="need-take">Забрать</label>
+      </div>
+
+      <div class="form-radio-btn">
+        <input id="need-no-take" type="radio" formControlName="needTake" [value]="false">
+        <label class="font-16" for="need-no-take">Самостоятельно</label>
+      </div>
+    </div>
+
+    <input class="font-16"
+           type="text"
+           placeholder="Укажите адрес откуда забрать питомца"
+           [style.background-color]="this.form.get('addressTake')?.dirty && this.form.get('addressTake')?.invalid ? 'rgb(255, 180, 180)' : null"
+           formControlName="addressTake"
+           *ngIf="this.form.get('needTake')?.value">
+  </div>
+
+  <div class="main-sitters h-container">
+    <p class="font-25"><b>Ваш выбор:</b></p>
+
+    <ng-container
+      *ngIf="selectedSitters.length > 0">
+      <div *ngFor="let sitter of selectedSitters; index as i"
+           class="block sitter-card">
+        <p class="m-16 font-25">Ситтер {{ i + 1 }}</p>
+        <p class="m-16 font-25"><b>{{ sitter.name }}</b></p>
+        <p class="m-16 font-16">
+          Стаж: {{ sitter.experience }} г.<br>
+          Беру: {{ parseTakes(sitter) }}<br>
+          {{ sitter.readyComeItself ? 'Готов сам приехать' : 'Питомца нужно привезти' }}<br>
+          Цена за сутки: {{ sitter.price }} руб.</p>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="selectedSitters.length == 0">
+      <div class="block sitter-card">
+        <p class="m-16 font-25">Мы сами подберем вам подходящего ситтера</p>
+      </div>
+    </ng-container>
+
+    <div class="block h-container sitter-card">
+      <p class="font-25"><b>Ориентировочная цена:<br>{{ getMinSum() }} - {{ getMaxSum() }} руб.</b></p>
+      <button (click)="send()">Оформить заказ</button>
+      <p class="font-12">Нажимая кнопку “Оформить заказ” вы подтверждаете правильность указанных данных и даете свое
+        согласие на обработку персональных данных</p>
+    </div>
+  </div>
+</div>

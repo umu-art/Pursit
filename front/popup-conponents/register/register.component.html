@@ -1,6 +1,6 @@
 <div class="block">
-  <div (click)="finish.emit()"
-    class="header-container h-container">
+  <div (click)="popup.close()"
+       class="header-container h-container">
     <p class="title font-title-big">Purrfect Sitters</p>
     <p class="slog font-25">Сервис заботы о вашем питомце</p>
   </div>
@@ -25,10 +25,12 @@
 
     <div class="form-element">
       <label class="font-16" for="password_repeat">Повторите пароль</label>
-      <input class="font-16" type="password" id="password_repeat" autocomplete="current-password" [(ngModel)]="repeatPassword">
+      <input class="font-16" type="password" id="password_repeat" autocomplete="current-password"
+             [(ngModel)]="repeatPassword">
     </div>
 
     <button (click)="register()"
-      class="register-button">Зарегистрироваться</button>
+            class="register-button">Зарегистрироваться
+    </button>
   </div>
 </div>

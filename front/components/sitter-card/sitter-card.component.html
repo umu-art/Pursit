@@ -2,16 +2,19 @@
   <div>
     <div
       class="avatar"
-      [style.background-image]="'url(' + sitter.photoUrl + ')'"></div>
-    <p class="takeContext"
-       [innerText]="sitter.takeContext"></p>
+      [style.background-image]="'url(' + sitter.avatarUrl + ')'"></div>
+    <p class="takeContext">
+      Стаж: {{ sitter.experience }} г.<br>
+      Беру: {{ parseTakes(sitter) }}<br>
+      {{ sitter.readyComeItself ? 'Готов сам приехать' : 'Питомца нужно привезти' }}<br>
+      Цена за сутки: {{ sitter.price }} руб.</p>
   </div>
 
   <div class="body-container">
     <p class="title"
        [textContent]="sitter.name"></p>
     <p class="desc"
-       [innerText]="opened ? sitter.fullDescription : sitter.shortDescription"></p>
+       [innerText]="opened ? sitter.longDescription : sitter.shortDescription"></p>
 
     <div *ngIf="opened">
       <p class="title">Фотографии передержек</p>
@@ -29,9 +32,7 @@
         [textContent]="opened ? 'Скрыть' : 'Подробнее'"
         (click)="showMore()"></button>
       <button
-        (click)="contacts()"
-        [disabled]="contactsShow"
-        [innerText]="contactsShow ? sitter.contacts : 'Показать контакты'">Показать контакты
+        (click)="request()">Заказать услугу
       </button>
     </div>
   </div>

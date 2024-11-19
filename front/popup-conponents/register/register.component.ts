@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {UserService} from '../../pursit-api-ts';
+import {PopupContainerComponent} from '../../components/popup-container/popup-container.component';
+import {ErrorMessagerComponent} from '../../components/error-messager/error-messager.component';
 
 @Component({
   selector: 'app-register',
@@ -8,22 +10,25 @@ import {UserService} from '../../pursit-api-ts';
   imports: [
     FormsModule
   ],
+  providers: [ErrorMessagerComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  @Output() finish = new EventEmitter<void>();
-
   username: string = '';
   email: string = '';
   password: string = '';
   repeatPassword: string = '';
 
-  constructor(private userService: UserService) {
+  constructor(
+    protected popup: PopupContainerComponent,
+    private errorMessager: ErrorMessagerComponent,
+    private userService: UserService) {
   }
 
   register() {
     if (this.password !== this.repeatPassword) {
+      this.errorMessager.showErrorMessage('Пароли не совпадают!')
       return
     }
 
@@ -34,10 +39,10 @@ export class RegisterComponent {
     }).subscribe({
       next: () => {
         console.log('Успеха');
-        this.finish.emit();
+        this.popup.close();
       },
       error: resp => {
-        console.log(resp)
+        this.errorMessager.showErrorMessage(resp.error);
       }
     });
   }

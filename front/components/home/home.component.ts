@@ -27,8 +27,9 @@ export class HomeComponent implements OnDestroy {
   private startPlayingTime: number = 0;
   private isPlaying: boolean = false;
 
-  constructor(private router: Router,
-              private apmService: ApmService) {
+  constructor(
+    private router: Router,
+    private apmService: ApmService) {
   }
 
   petSitting() {

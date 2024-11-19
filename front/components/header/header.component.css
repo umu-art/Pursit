@@ -25,34 +25,34 @@
   margin: 0 40px 0 0;
 }
 
-.login{
+.login {
   font-weight: 600;
   font-size: 16px;
   background-color: #C1D7ED;
   color: black;
 }
 
-.login:hover{
+.login:hover {
   background-color: #A9C9E3;
   color: black;
 }
 
-.login:active{
+.login:active {
   background-color: #8AB8D6;
 }
 
-.register{
+.register {
   font-weight: 600;
   font-size: 16px;
   background-color: #FAD7A7;
   color: black;
 }
 
-.register:hover{
+.register:hover {
   background-color: #F0C98E;
   color: black;
 }
 
-.register:active{
+.register:active {
   background-color: #E0B16F;
 }

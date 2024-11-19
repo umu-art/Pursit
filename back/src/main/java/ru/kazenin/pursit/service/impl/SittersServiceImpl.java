@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kazenin.model.SitterDto;
-import ru.kazenin.pursit.domain.SitterEntity;
-import ru.kazenin.pursit.exception.NotFoundException;
 import ru.kazenin.pursit.jpa.SitterJpa;
 import ru.kazenin.pursit.mapper.SitterMapper;
 import ru.kazenin.pursit.service.SittersService;
@@ -30,9 +28,10 @@ public class SittersServiceImpl implements SittersService {
     }
 
     @Override
-    public SitterDto getById(UUID sitterId) {
-        return sitterMapper.toDto(
-                sitterJpa.findById(sitterId)
-                        .orElseThrow(() -> new NotFoundException(SitterEntity.class, sitterId)));
+    public List<SitterDto> getByIds(List<UUID> sittersIds) {
+        return sitterJpa.findAllByIdIn(sittersIds)
+                .stream()
+                .map(sitterMapper::toDto)
+                .toList();
     }
 }

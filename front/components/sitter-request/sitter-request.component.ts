@@ -58,13 +58,21 @@ export class SitterRequestComponent {
     if (params.has('sitters')) {
       this.sittersIds = params.get('sitters')!.split(',');
       sittersService.getSittersByIds(this.sittersIds)
-        .subscribe(sitters => this.selectedSitters = sitters);
+        .subscribe({
+          next: sitters => this.selectedSitters = sitters,
+          error: () => router.navigate(['/home'])
+            .catch(err => console.error(err))
+        });
     } else {
       this.selectedSitters = [];
     }
 
     userService.getSelf()
-      .subscribe(u => this.user = u);
+      .subscribe({
+        next: user => this.user = user,
+        error: () => router.navigate(['/home'])
+          .catch(err => console.error(err))
+      });
 
     this.form = formBuilder.group({
       fullName: ['', [Validators.required]],

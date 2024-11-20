@@ -1,5 +1,6 @@
 package ru.kazenin.pursit.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -58,11 +59,11 @@ public class SitterEntity {
     @Column(name = "takes_dogs", nullable = false)
     private boolean takesDogs;
 
-    @OneToMany(mappedBy = "sitter", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "sitter", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.SUBSELECT)
     private List<SitterPhotoEntity> photosUrls;
 
-    @OneToOne(mappedBy = "sitter", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "sitter", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private SitterGeolocationEntity geolocation;
 }

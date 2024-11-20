@@ -10,7 +10,15 @@ public interface SitterMapper {
 
     SitterDto toDto(SitterEntity sitterEntity);
 
+    SitterEntity toEntity(SitterDto sitterDto);
+
     default String map(SitterPhotoEntity sitterPhotoEntity) {
         return sitterPhotoEntity.getPhotoUrl();
+    }
+
+    default SitterPhotoEntity map(String s) {
+        var res = new SitterPhotoEntity();
+        res.setPhotoUrl(s);
+        return res;
     }
 }

@@ -93,7 +93,7 @@ paths:
     get:
       tags:
         - sitters
-      summary: Получение ситтера по id
+      summary: Получение ситтеров по ids
       operationId: getSittersByIds
       parameters:
         - name: sittersIds
@@ -106,13 +106,26 @@ paths:
               format: uuid
       responses:
         200:
-          description: Ситтер
+          description: Ситтеры
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/SitterDto"
+    put:
+      tags:
+        - sitters
+      summary: Создание ситтера
+      operationId: createSitter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SitterDto"
+      responses:
+        200:
+          description: Успеха
 
   /backend/sitter/list:
     get:

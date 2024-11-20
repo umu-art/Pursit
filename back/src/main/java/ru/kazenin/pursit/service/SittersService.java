@@ -10,4 +10,6 @@ public interface SittersService {
     List<SitterDto> getAll();
 
     List<SitterDto> getByIds(List<UUID> sittersIds);
+
+    void createSitter(SitterDto sitterDto);
 }

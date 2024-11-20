@@ -26,6 +26,12 @@ public class SittersController implements SittersApi {
     private final SitterJpa sitterJpa;
 
     @Override
+    public ResponseEntity<Void> createSitter(SitterDto sitterDto) {
+        sittersService.createSitter(sitterDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
     public ResponseEntity<List<SitterDto>> getSitters() {
         log.info("getSitters");
         return ResponseEntity.ok(sittersService.getAll());

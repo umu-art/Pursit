@@ -34,4 +34,14 @@ public class SittersServiceImpl implements SittersService {
                 .map(sitterMapper::toDto)
                 .toList();
     }
+
+    @Override
+    public void createSitter(SitterDto sitterDto) {
+        var entity = sitterMapper.toEntity(sitterDto);
+        entity.getGeolocation().setSitter(entity);
+        entity.getPhotosUrls()
+                .forEach(photo -> photo.setSitter(entity));
+
+        sitterJpa.save(entity);
+    }
 }

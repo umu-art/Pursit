@@ -1,4 +1,4 @@
-<p class="font-28-bold">Заявка на {{ type }}</p>
+<p class="font-28-bold">Заявка на {{ title }}</p>
 <div class="w-container">
   <div class="main-form h-container" [formGroup]="form">
     <p class="font-25"><b>Данные о Вас:</b></p>
@@ -46,9 +46,14 @@
       </div>
     </div>
 
-    <p class="desc-low">Выберите даты передержки:</p>
+    <p *ngIf="type === SitterType.PetSitting" class="desc-low">Выберите даты передержки:</p>
+    <p *ngIf="type === SitterType.PetMoving" class="desc-low">Выберите дату перевозки:</p>
+    <p *ngIf="type === SitterType.PetHealth" class="desc-low">Выберите дату визита:</p>
+
+
     <div class="w-container form-radio-group">
-      <p class="font-16">с</p>
+      <p *ngIf="type === SitterType.PetSitting"
+         class="font-16">с</p>
 
       <input class="font-16"
              type="date"
@@ -56,13 +61,15 @@
              [style.background-color]="this.form.get('startDate')?.dirty && this.form.get('startDate')?.invalid ? 'rgb(255, 180, 180)' : null"
              formControlName="startDate">
 
-      <p class="font-16">по</p>
+      <ng-container *ngIf="type === SitterType.PetSitting">
+        <p class="font-16">по</p>
 
-      <input class="font-16"
-             type="date"
-             value="2024-09-13"
-             [style.background-color]="this.form.get('endDate')?.dirty && this.form.get('endDate')?.invalid ? 'rgb(255, 180, 180)' : null"
-             formControlName="endDate">
+        <input class="font-16"
+               type="date"
+               value="2024-09-13"
+               [style.background-color]="this.form.get('endDate')?.dirty && this.form.get('endDate')?.invalid ? 'rgb(255, 180, 180)' : null"
+               formControlName="endDate">
+      </ng-container>
     </div>
 
     <p class="font-25"><b>Данные о вашем питомце:</b></p>
@@ -136,26 +143,28 @@
       [style.background-color]="this.form.get('otherMessage')?.dirty && this.form.get('otherMessage')?.invalid ? 'rgb(255, 180, 180)' : null"
       formControlName="otherMessage"></textarea>
 
-    <p class="desc-low">Вашего питомца забрать или вы привезете его самостоятельно?</p>
+    <ng-container *ngIf="type === SitterType.PetSitting">
+      <p class="desc-low">Вашего питомца забрать или вы привезете его самостоятельно?</p>
 
-    <div class="form-radio-group w-container">
-      <div class="form-radio-btn">
-        <input id="need-take" type="radio" formControlName="needTake" [value]="true">
-        <label class="font-16" for="need-take">Забрать</label>
-      </div>
+      <div class="form-radio-group w-container">
+        <div class="form-radio-btn">
+          <input id="need-take" type="radio" formControlName="needTake" [value]="true">
+          <label class="font-16" for="need-take">Забрать</label>
+        </div>
 
-      <div class="form-radio-btn">
-        <input id="need-no-take" type="radio" formControlName="needTake" [value]="false">
-        <label class="font-16" for="need-no-take">Самостоятельно</label>
+        <div class="form-radio-btn">
+          <input id="need-no-take" type="radio" formControlName="needTake" [value]="false">
+          <label class="font-16" for="need-no-take">Самостоятельно</label>
+        </div>
       </div>
-    </div>
+    </ng-container>
 
     <input class="font-16"
            type="text"
-           placeholder="Укажите адрес откуда забрать питомца"
+           placeholder="{{ type === SitterType.PetSitting ? 'Укажите адрес откуда забрать питомца' : 'Укажите адрес питомца*'}}"
            [style.background-color]="this.form.get('addressTake')?.dirty && this.form.get('addressTake')?.invalid ? 'rgb(255, 180, 180)' : null"
            formControlName="addressTake"
-           *ngIf="this.form.get('needTake')?.value">
+           *ngIf="type !== SitterType.PetSitting || this.form.get('needTake')?.value">
   </div>
 
   <div class="main-sitters h-container">
@@ -176,14 +185,22 @@
     </ng-container>
 
     <ng-container
-      *ngIf="selectedSitters.length == 0">
+      *ngIf="selectedSitters.length === 0">
       <div class="block sitter-card">
         <p class="m-16 font-25">Мы сами подберем вам подходящего ситтера</p>
       </div>
     </ng-container>
 
     <div class="block h-container sitter-card">
-      <p class="font-25"><b>Ориентировочная цена:<br>{{ getMinSum() }} - {{ getMaxSum() }} руб.</b></p>
+
+      <p *ngIf="selectedSitters.length !== 0 && getMinSum() !== getMaxSum()" class="font-25"><b>Ориентировочная
+        цена:<br>{{ getMinSum() }} - {{ getMaxSum() }} руб.</b></p>
+
+      <p *ngIf="selectedSitters.length !== 0 && getMinSum() === getMaxSum()" class="font-25"><b>Ориентировочная
+        цена:<br>{{ getMinSum() }} руб.</b></p>
+
+      <p *ngIf="selectedSitters.length === 0" class="font-25"><b>Ориентировочную цену сообщим позднее.</b></p>
+
       <button (click)="send()">Оформить заказ</button>
       <p class="font-12">Нажимая кнопку “Оформить заказ” вы подтверждаете правильность указанных данных и даете свое
         согласие на обработку персональных данных</p>

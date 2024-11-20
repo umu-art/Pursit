@@ -25,7 +25,8 @@ import {parseTakes} from '../../src/utils';
 export class SitterRequestComponent {
   selectedSitters: SitterDto[] = [];
   user: UserDto = {};
-  type: string;
+  type: SitterType;
+  title: string;
   form: FormGroup;
   sittersIds: string[] | undefined;
 
@@ -39,23 +40,24 @@ export class SitterRequestComponent {
 
     const url: string = this.router.routerState.snapshot.url;
     const params = new URLSearchParams(new URL(url, "https://some.ru/").search);
+    this.type = params.get('type')! as SitterType;
 
-    switch (params.get('type')! as SitterType) {
+    switch (this.type) {
       case "moral-pet-sitting":
-        this.type = 'передержку с зоопсихологом';
+        this.title = 'передержку с зоопсихологом';
         break
       case 'pet-sitting':
-        this.type = 'передержку';
+        this.title = 'передержку';
         break
       case 'pet-moving':
-        this.type = 'перевозку';
+        this.title = 'перевозку';
         break
       case 'pet-health':
-        this.type = 'выезд ветеринара';
+        this.title = 'выезд ветеринара';
         break
     }
 
-    if (params.has('sitters')) {
+    if (this.type) {
       this.sittersIds = params.get('sitters')!.split(',');
       sittersService.getSittersByIds(this.sittersIds)
         .subscribe({
@@ -74,23 +76,49 @@ export class SitterRequestComponent {
           .catch(err => console.error(err))
       });
 
-    this.form = formBuilder.group({
-      fullName: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
-      tg: ['', []],
-      reportsTarget: [ReportsTarget.Tg, [Validators.required]],
-      startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]],
-      petName: ['', [Validators.required]],
-      isCat: [true, [Validators.required]],
-      breed: ['', [Validators.required]],
-      isMale: [true, [Validators.required]],
-      height: ['', [Validators.required]],
-      hasVaccinations: [false, [Validators.required]],
-      otherMessage: ['', []],
-      needTake: [true, [Validators.required]],
-      addressTake: ['', []],
-    });
+    switch (params.get('type')! as SitterType) {
+      case SitterType.PetSitting:
+        this.form = formBuilder.group({
+          fullName: ['', [Validators.required]],
+          phone: ['', [Validators.required]],
+          tg: ['', []],
+          reportsTarget: [ReportsTarget.Tg, [Validators.required]],
+          startDate: ['', [Validators.required]],
+          endDate: ['', [Validators.required]],
+          petName: ['', [Validators.required]],
+          isCat: [true, [Validators.required]],
+          breed: ['', [Validators.required]],
+          isMale: [true, [Validators.required]],
+          height: ['', [Validators.required]],
+          hasVaccinations: [false, [Validators.required]],
+          otherMessage: ['', []],
+          needTake: [true, [Validators.required]],
+          addressTake: ['', []],
+        });
+        break;
+      case SitterType.PetHealth:
+      case SitterType.PetMoving:
+        this.form = formBuilder.group({
+          fullName: ['', [Validators.required]],
+          phone: ['', [Validators.required]],
+          tg: ['', []],
+          reportsTarget: [ReportsTarget.Tg, [Validators.required]],
+          startDate: ['', [Validators.required]],
+          petName: ['', [Validators.required]],
+          isCat: [true, [Validators.required]],
+          breed: ['', [Validators.required]],
+          isMale: [true, [Validators.required]],
+          height: ['', [Validators.required]],
+          hasVaccinations: [false, [Validators.required]],
+          otherMessage: ['', []],
+          addressTake: ['', [Validators.required]],
+        });
+        break;
+      default:
+        this.form = formBuilder.group({});
+        break;
+    }
+
   }
 
   send() {
@@ -188,4 +216,5 @@ export class SitterRequestComponent {
 
   protected readonly parseTakes = parseTakes;
   protected readonly ReportsTarget = ReportsTarget;
+  protected readonly SitterType = SitterType;
 }

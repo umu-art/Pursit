@@ -3,32 +3,8 @@
 
   <url>
     <loc>https://pursit.ru/home</loc>
-    <lastmod>2024-11-12</lastmod>
+    <lastmod>2024-11-21</lastmod>
     <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://pursit.ru/moral-pet-sitting</loc>
-    <lastmod>2024-11-12</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://pursit.ru/list?type=pet-sitting</loc>
-    <lastmod>2024-11-12</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://pursit.ru/list?type=pet-moving</loc>
-    <lastmod>2024-11-12</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://pursit.ru/list?type=pet-health</loc>
-    <lastmod>2024-11-12</lastmod>
-    <priority>0.8</priority>
   </url>
 
 </urlset>

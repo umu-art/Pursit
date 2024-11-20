@@ -41,7 +41,7 @@ export class ListFlyButtonComponent {
             .catch(err => console.error(err));
         },
         error: () => {
-          this.popup.login()
+          this.popup.register()
         }
       })
   }

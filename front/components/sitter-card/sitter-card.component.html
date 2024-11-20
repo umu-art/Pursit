@@ -32,7 +32,10 @@
         [textContent]="opened ? 'Скрыть' : 'Подробнее'"
         (click)="showMore()"></button>
       <button
-        (click)="request()">Заказать услугу
+        [textContent]="selected ? 'Отменить выбор' : 'Выбрать'"
+        [style.background-color]="selected ? 'rgba(155,255,0,0.5)' : 'var(--main-color)'"
+        [style.color]="selected ? 'black' : 'white'"
+        (click)="request()">
       </button>
     </div>
   </div>

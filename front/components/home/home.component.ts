@@ -34,7 +34,7 @@ export class HomeComponent implements OnDestroy {
 
   petSitting() {
     this.apmService.logGoto('opened pet-sitting', '');
-    this.router.navigate(['/list'], {queryParams: {category: 'pet-sitting'}})
+    this.router.navigate(['/list'], {queryParams: {type: 'pet-sitting'}})
       .catch(err => console.error(err));
   }
 
@@ -46,13 +46,13 @@ export class HomeComponent implements OnDestroy {
 
   petMoving() {
     this.apmService.logGoto('opened pet-moving', '');
-    this.router.navigate(['/list'], {queryParams: {category: 'pet-moving'}})
+    this.router.navigate(['/list'], {queryParams: {type: 'pet-moving'}})
       .catch(err => console.error(err));
   }
 
   petHealth() {
     this.apmService.logGoto('opened pet-health', '');
-    this.router.navigate(['/list'], {queryParams: {category: 'pet-health'}})
+    this.router.navigate(['/list'], {queryParams: {type: 'pet-health'}})
       .catch(err => console.error(err));
   }
 

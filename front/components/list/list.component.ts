@@ -5,6 +5,12 @@ import {NgClass, NgForOf} from '@angular/common';
 import {ApmService} from '../../lib/apm.service';
 import {SitterDto, SittersService, SitterType} from '../../pursit-api-ts';
 import {shuffleArray} from '../../src/utils';
+import {ListFlyButtonComponent} from '../list-fly-button/list-fly-button.component';
+
+export class SitterSelect {
+  sitter: SitterDto = {};
+  selected: boolean = false;
+}
 
 @Component({
   selector: 'app-list',
@@ -12,15 +18,16 @@ import {shuffleArray} from '../../src/utils';
   imports: [
     SitterCardComponent,
     NgForOf,
-    NgClass
+    NgClass,
+    ListFlyButtonComponent
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
 export class ListComponent {
 
-  sitters: SitterDto[];
-  category: string | null;
+  sitters: SitterSelect[];
+  type: SitterType;
 
   constructor(
     private sittersService: SittersService,
@@ -29,7 +36,7 @@ export class ListComponent {
 
     const url: string = this.router.routerState.snapshot.url;
     const params = new URLSearchParams(new URL(url, "https://some.ru/").search);
-    this.category = params.get('category');
+    this.type = params.get('type')! as SitterType;
     this.sitters = [];
     this.updateList()
   }
@@ -39,25 +46,19 @@ export class ListComponent {
       .subscribe((resp) => {
         this.sitters =
           shuffleArray(
-            resp.filter(s => {
-              switch (this.category) {
-                case 'pet-sitting':
-                  return s.type == SitterType.PetSitting;
-                case 'pet-moving':
-                  return s.type == SitterType.PetMoving;
-                case 'pet-health':
-                  return s.type == SitterType.PetHealth;
-                default:
-                  return false;
-              }
-            })
+            resp.filter(s => s.type === this.type)
+              .map(s => {
+                return {
+                  sitter: s
+                } as SitterSelect
+              })
           )
       });
   }
 
   petSitting() {
     this.apmService.logGoto('opened pet-sitting', '');
-    this.category = 'pet-sitting';
+    this.type = 'pet-sitting';
     this.updateList();
   }
 
@@ -69,13 +70,13 @@ export class ListComponent {
 
   petMoving() {
     this.apmService.logGoto('opened pet-moving', '');
-    this.category = 'pet-moving';
+    this.type = 'pet-moving';
     this.updateList();
   }
 
   petHealth() {
     this.apmService.logGoto('opened pet-health', '');
-    this.category = 'pet-health';
+    this.type = 'pet-health';
     this.updateList();
   }
 
@@ -83,5 +84,4 @@ export class ListComponent {
     this.router.navigate(['/home'])
       .catch(err => console.error(err));
   }
-
 }

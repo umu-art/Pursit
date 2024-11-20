@@ -20,6 +20,11 @@ export class HeaderComponent {
     protected popup: PopupContainerComponent,
     userService: UserService) {
 
+    userService.getSelf().subscribe({
+      next: user => this.username = user.username,
+      error: () => this.username = undefined
+    });
+
     setInterval(() => {
       userService.getSelf().subscribe({
         next: user => this.username = user.username,

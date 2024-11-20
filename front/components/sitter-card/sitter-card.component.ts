@@ -1,8 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ApmService} from '../../lib/apm.service';
 import {NgForOf, NgIf} from '@angular/common';
-import {Router} from '@angular/router';
-import {SitterDto, UserService} from '../../pursit-api-ts';
+import {SitterDto} from '../../pursit-api-ts';
 import {PopupContainerComponent} from '../popup-container/popup-container.component';
 import {parseTakes} from '../../src/utils';
 
@@ -19,28 +18,17 @@ import {parseTakes} from '../../src/utils';
 })
 export class SitterCardComponent {
   @Input() sitter: SitterDto = {};
+  @Output() selectEvent: EventEmitter<boolean> = new EventEmitter();
 
   opened: boolean = false;
+  selected: boolean = false;
 
-  constructor(
-    private popup: PopupContainerComponent,
-    private userService: UserService,
-    private router: Router,
-    private apmService: ApmService) {
+  constructor(private apmService: ApmService) {
   }
 
   request() {
-    this.userService.getSelf()
-      .subscribe({
-        next: () => {
-          this.apmService.logGoto('opened pet-moving', '');
-          this.router.navigate(['/sitter-request'], {queryParams: {sitter: this.sitter.id}})
-            .catch(err => console.error(err));
-        },
-        error: () => {
-          this.popup.login()
-        }
-      })
+    this.selected = !this.selected;
+    this.selectEvent.emit(this.selected);
   }
 
   showMore() {

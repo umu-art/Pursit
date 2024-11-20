@@ -14,19 +14,19 @@
   </url>
 
   <url>
-    <loc>https://pursit.ru/list?category=pet-sitting</loc>
+    <loc>https://pursit.ru/list?type=pet-sitting</loc>
     <lastmod>2024-11-12</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://pursit.ru/list?category=pet-moving</loc>
+    <loc>https://pursit.ru/list?type=pet-moving</loc>
     <lastmod>2024-11-12</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://pursit.ru/list?category=pet-health</loc>
+    <loc>https://pursit.ru/list?type=pet-health</loc>
     <lastmod>2024-11-12</lastmod>
     <priority>0.8</priority>
   </url>

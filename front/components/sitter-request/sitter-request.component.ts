@@ -98,8 +98,8 @@ export class SitterRequestComponent {
       email: this.user.email,
       tg: this.form.get('tg')?.value,
       reportsTarget: this.form.get('reportsTarget')?.value,
-      startDate: this.form.get('startDate')?.value,
-      endDate: this.form.get('endDate')?.value,
+      startDate: new Date(this.form.get('startDate')?.value).toISOString(),
+      endDate: new Date(this.form.get('endDate')?.value).toISOString(),
       petName: this.form.get('petName')?.value,
       isCat: this.form.get('isCat')?.value,
       breed: this.form.get('breed')?.value,
@@ -122,8 +122,12 @@ export class SitterRequestComponent {
     )
   }
 
-
   getMinSum() {
+    if (!this.selectedSitters ||
+      this.selectedSitters.length === 0) {
+      return 0;
+    }
+
     let res: number | undefined = this.selectedSitters[0].price!;
     for (const sitter of this.selectedSitters) {
       if (sitter.price && sitter.price < res) {
@@ -131,18 +135,27 @@ export class SitterRequestComponent {
       }
     }
 
-    const startDate: Date = this.form.get('startDate')?.value;
-    const endDate: Date = this.form.get('endDate')?.value;
-    const days = (endDate.getTime() - startDate.getTime()) / 86400000;
-
-    if (days < 0) {
-      return undefined;
+    if (!this.form.get('startDate')?.value || !this.form.get('endDate')?.value) {
+      return 0;
     }
 
-    return days * res;
+    const startDate = Date.parse(this.form.get('startDate')?.value);
+    const endDate = Date.parse(this.form.get('endDate')?.value);
+    const days = (endDate - startDate) / 86400000;
+
+    if (days < 0) {
+      return 0;
+    }
+
+    return (days + 1) * res;
   }
 
   getMaxSum() {
+    if (!this.selectedSitters ||
+      this.selectedSitters.length === 0) {
+      return 0;
+    }
+
     let res: number | undefined = this.selectedSitters[0].price!;
     for (const sitter of this.selectedSitters) {
       if (sitter.price && sitter.price > res) {
@@ -150,15 +163,19 @@ export class SitterRequestComponent {
       }
     }
 
-    const startDate: Date = this.form.get('startDate')?.value;
-    const endDate: Date = this.form.get('endDate')?.value;
-    const days = (endDate.getTime() - startDate.getTime()) / 86400000;
-
-    if (days < 0) {
-      return undefined;
+    if (!this.form.get('startDate')?.value || !this.form.get('endDate')?.value) {
+      return 0;
     }
 
-    return days * res;
+    const startDate = Date.parse(this.form.get('startDate')?.value);
+    const endDate = Date.parse(this.form.get('endDate')?.value);
+    const days = (endDate - startDate) / 86400000;
+
+    if (days < 0) {
+      return 0;
+    }
+
+    return (days + 1) * res;
   }
 
   protected readonly parseTakes = parseTakes;

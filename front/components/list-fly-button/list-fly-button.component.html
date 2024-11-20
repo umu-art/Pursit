@@ -1,0 +1,14 @@
+<div class="container block">
+  <button
+    (click)="request()">Заказать услугу
+  </button>
+
+  <p *ngIf="countSelected() === 0"
+     class="font-16">Выберите ситтеров, или мы подберем их сами</p>
+
+  <p *ngIf="countSelected() === 1"
+     class="font-16">Выбран 1 ситтер</p>
+
+  <p *ngIf="countSelected() > 1"
+     class="font-16">Выбраны {{ countSelected() }} ситтера</p>
+</div>

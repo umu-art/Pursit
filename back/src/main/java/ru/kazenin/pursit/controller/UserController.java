@@ -83,6 +83,13 @@ public class UserController implements UserApi {
     }
 
     @Override
+    public ResponseEntity<Void> logout() {
+        return ResponseEntity.ok()
+                .header("Set-Cookie", AUTH_COOKIE + "=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT")
+                .build();
+    }
+
+    @Override
     public ResponseEntity<UserDto> getSelf() {
         return ResponseEntity.ok(userService.getSelf());
     }

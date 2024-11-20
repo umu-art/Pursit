@@ -1,0 +1,24 @@
+PUT https://pursit.ru/backend/sitter
+Content-Type: application/json
+Cookie: mur=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiLQktC10LvQuNC60LjQuSIsImlhdCI6MTczMjA2MDgxMiwiZXhwIjoxNzMyMjMzNjEyfQ.XzDCpFt8_jQujRAmFpjtos00jIRpU7TxXTk42Cx4Ox-Quw5r_PZC-ugn9SooqxOGflkNCabcUwVS6MLG4ZUmpQ
+
+{
+  "type": "pet-moving",
+  "name": "Тестовый ситтер 4",
+  "avatarUrl": "/cat.png",
+  "shortDescription": "Тестовый ситтер 4, короткое описание",
+  "longDescription": "Тестовый ситтер 4, полное описание, длинное описание, длинное описание, длинное описание, длинное описание, длинное описание, длинное описание, длинное описание, длинное описание",
+  "price": 1000,
+  "experience": 1,
+  "photosUrls": [],
+  "readyComeItself": true,
+  "takesCats": false,
+  "takesDogs": true,
+  "geolocation": {
+    "latitude": 0,
+    "longitude": 0,
+    "name": "Местоположение тестового ситтера 4"
+  }
+}
+
+###

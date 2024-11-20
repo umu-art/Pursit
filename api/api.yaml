@@ -27,6 +27,16 @@ paths:
         200:
           description: Успешная авторизация
 
+  /backend/user/logout:
+    post:
+      tags:
+        - user
+      summary: Разавторизация пользователя
+      operationId: logout
+      responses:
+        200:
+          description: Успешная разавторизация
+
   /backend/user/register:
     post:
       tags:

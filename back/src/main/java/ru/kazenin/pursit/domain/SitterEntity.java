@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -23,6 +24,7 @@ import java.util.UUID;
 @Table(name = "sitters")
 public class SitterEntity {
     @Id
+    @GeneratedValue
     private UUID id;
 
     @Column(name = "name", nullable = false)

@@ -47,7 +47,7 @@ public class SitterEntity {
     private int price;
 
     @Column(name = "contacts", nullable = false)
-    private String contacts;
+    private String contacts = "insert here";
 
     @Column(name = "experience", nullable = false)
     private int experience;

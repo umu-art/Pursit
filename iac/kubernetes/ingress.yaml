@@ -27,6 +27,13 @@ spec:
                 name: pursit-back
                 port:
                   name: http
+          - path: /cdn
+            pathType: Prefix
+            backend:
+              service:
+                name: pursit-cdn
+                port:
+                  name: http
 
     - host: xn--h1andegc.xn--p1ai
       http:
@@ -43,6 +50,13 @@ spec:
             backend:
               service:
                 name: pursit-back
+                port:
+                  name: http
+          - path: /cdn
+            pathType: Prefix
+            backend:
+              service:
+                name: pursit-cdn
                 port:
                   name: http
   tls:

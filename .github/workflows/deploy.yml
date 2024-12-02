@@ -44,6 +44,38 @@ jobs:
       - name: Kube rollout restart
         run: kubectl rollout restart deployment/pursit-front -n pursit
 
+  deploy-cdn:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare
+        uses: ./.github/workflows/actions/prepare_env
+
+      - name: Build docker image
+        uses: ./.github/workflows/actions/build_image
+        with:
+          image: pursit-cdn
+          actor: ${{ github.actor }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set kube context
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBESECRET }}
+
+      - name: Kube rollout restart
+        run: kubectl rollout restart deployment/pursit-cdn -n pursit
+
+
   deploy-back:
     runs-on: ubuntu-latest
 

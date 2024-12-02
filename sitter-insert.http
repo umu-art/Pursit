@@ -1,14 +1,14 @@
 PUT https://pursit.ru/backend/sitter
 Content-Type: application/json
-Cookie: mur=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiLQktC10LvQuNC60LjQuSIsImlhdCI6MTczMjA2MDgxMiwiZXhwIjoxNzMyMjMzNjEyfQ.XzDCpFt8_jQujRAmFpjtos00jIRpU7TxXTk42Cx4Ox-Quw5r_PZC-ugn9SooqxOGflkNCabcUwVS6MLG4ZUmpQ
+Cookie: mur=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiLQvtC-0L7QvtC-0L7QvtC-0L7QvtC-0L7QvtC-0L7QvtC-0L7QvtC-0L7Rh9C10L3RjCDQtNC70LjQuNC40LjQuNC40LjQuNC40LjQuNC40LjQuNC90L3QvtC1INC40LzRjyIsImlhdCI6MTczMzE1NDY2MCwiZXhwIjoxNzMzMzI3NDYwfQ.JDlHb36eGeChy09hpU8nUYljdqmAb-YrYjznDCiW6bn6tuZi7_2Gn9kEYXXATeS-e_bhjS1eNKuQUAp-qgmnpg
 
 {
-  "type": "pet-moving",
-  "name": "Тестовый ситтер 4",
+  "type": "pet-sitting",
+  "name": "Елизавета Б.",
   "avatarUrl": "/cat.png",
-  "shortDescription": "Тестовый ситтер 4, короткое описание",
-  "longDescription": "Тестовый ситтер 4, полное описание, длинное описание, длинное описание, длинное описание, длинное описание, длинное описание, длинное описание, длинное описание, длинное описание",
-  "price": 1000,
+  "shortDescription": "Домашняя передержка животных – это размещение питомцев в тех условиях, к которым они привыкли.",
+  "longDescription": "Домашняя передержка животных – это размещение питомцев в тех условиях, к которым они привыкли. На фотографиях питомцы, которые хорошо провели время в нашем доме. Такая передержка предлагает помощь хозяевам, планирующим отъезд, отпуск. Это временное жилище для вашей собаки, в котором она не будет испытывать дискомфорт. Опытные руки хозяев передержки найдут подход к вашему питомцу и помогут перенести разлуку. Ждём ваших питомцев у нас в гостях! Люблю животных, опыт в этой сфере большой. Домашняя передержка в загородном доме с 3х либо 4х разовым выгулом на большом участке и в лесу.",
+  "price": 700,
   "experience": 1,
   "photosUrls": [],
   "readyComeItself": true,

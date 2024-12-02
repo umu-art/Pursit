@@ -115,6 +115,7 @@ jobs:
     needs:
       - deploy-front
       - deploy-back
+      - deploy-cdn
 
     runs-on: ubuntu-latest
 

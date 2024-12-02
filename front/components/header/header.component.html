@@ -20,7 +20,7 @@
       </button>
     </ng-container>
     <ng-container *ngIf="username">
-      <p class="m-16 font-16-bold text-center">Здравствуйте, {{ username }}</p>
+      <p class="m-16 font-16-bold text-center" style="width: min-content;">Здравствуйте, {{ username }}</p>
       <button
         class="login"
         (click)="logout()">Выход

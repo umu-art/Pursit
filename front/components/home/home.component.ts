@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
-import {ApmService} from '../../lib/apm.service';
+import {ApmService} from '../../services/apm.service';
 import {YoutubePlayerComponent} from 'ngx-youtube-player';
 import {NgClass, NgForOf} from '@angular/common';
 

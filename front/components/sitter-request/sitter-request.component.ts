@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
-import {ReportsTarget, SitterDto, SittersService, SitterType, UserDto, UserService} from '../../pursit-api-ts';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
-import {ErrorMessagerComponent} from '../error-messager/error-messager.component';
-import {ApmService} from '../../lib/apm.service';
+import {ErrorComponent} from '../error/error.component';
+import {ApmService} from '../../services/apm.service';
 import {parseTakes} from '../../src/utils';
+import {UserHolder} from '../../services/user-holder.service';
+import {ReportsTarget, SitterDto, SittersService, SitterType, UserDto} from '../../api-core-ts';
 
 @Component({
   selector: 'app-sitter-request',
@@ -17,7 +18,7 @@ import {parseTakes} from '../../src/utils';
     ReactiveFormsModule
   ],
   providers: [
-    ErrorMessagerComponent
+    ErrorComponent
   ],
   templateUrl: './sitter-request.component.html',
   styleUrl: './sitter-request.component.css'
@@ -31,12 +32,17 @@ export class SitterRequestComponent {
   sittersIds: string[] | undefined;
 
   constructor(
-    userService: UserService,
+    protected userService: UserHolder,
     private apmService: ApmService,
     private sittersService: SittersService,
-    private errorMessager: ErrorMessagerComponent,
+    private errorMessager: ErrorComponent,
     private router: Router,
-    formBuilder: FormBuilder) {
+    protected formBuilder: FormBuilder) {
+
+    if (!userService.isLogined()) {
+      router.navigate(['/home'])
+        .catch(console.error);
+    }
 
     const url: string = this.router.routerState.snapshot.url;
     const params = new URLSearchParams(new URL(url, "https://some.ru/").search);
@@ -68,13 +74,6 @@ export class SitterRequestComponent {
     } else {
       this.selectedSitters = [];
     }
-
-    userService.getSelf()
-      .subscribe({
-        next: user => this.user = user,
-        error: () => router.navigate(['/home'])
-          .catch(err => console.error(err))
-      });
 
     switch (params.get('type')! as SitterType) {
       case SitterType.PetSitting:

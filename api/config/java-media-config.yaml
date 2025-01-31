@@ -1,0 +1,12 @@
+additionalProperties:
+  artifactId: media-api
+  groupId: ru.kazenin.pursit
+  basePackage: ru.kazenin.pursit
+  invokerPackage: ru.kazenin.pursit
+  apiPackage: ru.kazenin.pursit.api
+  modelPackage: ru.kazenin.pursit.model
+  useTags: true
+  interfaceOnly: true
+  skipDefaultInterface: true
+  useSpringBoot3: true
+  useJakartaEe: true

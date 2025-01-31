@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {UserService} from '../../pursit-api-ts';
 import {PopupContainerComponent} from '../../components/popup-container/popup-container.component';
-import {ErrorMessagerComponent} from '../../components/error-messager/error-messager.component';
+import {ErrorComponent} from '../../components/error/error.component';
+import {UserHolder} from '../../services/user-holder.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import {ErrorMessagerComponent} from '../../components/error-messager/error-mess
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [ErrorMessagerComponent],
+  providers: [ErrorComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -20,9 +20,9 @@ export class LoginComponent {
 
   constructor(
     protected popup: PopupContainerComponent,
-    private errorMessager: ErrorMessagerComponent,
-    private userService: UserService,
-    fb: FormBuilder) {
+    private error: ErrorComponent,
+    private userHolder: UserHolder,
+    protected fb: FormBuilder) {
 
     this.form = fb.group({
       email: ['',
@@ -40,23 +40,18 @@ export class LoginComponent {
   }
 
   login() {
-    console.log(this.form);
     if (!this.form.valid) {
-      this.errorMessager.showErrorMessage('Некорректно заполнены поля!');
+      this.error.showErrorMessage('Некорректно заполнены поля!');
       return;
     }
 
-    this.userService.login({
-      email: this.form.get('email')?.value,
-      password: this.form.get('password')?.value
-    }).subscribe({
-      next: () => {
-        console.log('Успеха');
-        this.popup.close();
+    this.userHolder.login(
+      {
+        email: this.form.get('email')?.value,
+        password: this.form.get('password')?.value,
       },
-      error: resp => {
-        this.errorMessager.showErrorMessage(resp.error);
-      }
-    });
+      () => this.popup.close(),
+      resp => this.error.showErrorMessage(resp.error)
+    );
   }
 }

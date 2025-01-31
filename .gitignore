@@ -73,4 +73,5 @@ build/
 ### VS Code ###
 .vscode/
 iac/kubernetes/secret
-front/pursit-api-ts/
+front/api-*
+dist

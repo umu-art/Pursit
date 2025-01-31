@@ -2,7 +2,7 @@
   <div>
     <div
       class="avatar"
-      [style.background-image]="'url(' + sitter.avatarUrl + ')'"></div>
+      [style.background-image]="'url(/backend/media/' + sitter.avatarId + ')'"></div>
     <p class="takeContext">
       Стаж: {{ sitter.experience }} г.<br>
       Беру: {{ parseTakes(sitter) }}<br>
@@ -21,8 +21,8 @@
       <div class="sit-photo-container">
         <div
           class="sit-photo"
-          *ngFor="let photo of sitter.photosUrls"
-          [style.background-image]="'url(' + photo + ')'"></div>
+          *ngFor="let photo of sitter.photos"
+          [style.background-image]="'url(/backend/media/' + photo + ')'"></div>
       </div>
     </div>
 

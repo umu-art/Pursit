@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ApmService} from '../../lib/apm.service';
+import {ApmService} from '../../services/apm.service';
 import {NgForOf, NgIf} from '@angular/common';
-import {SitterDto} from '../../pursit-api-ts';
 import {PopupContainerComponent} from '../popup-container/popup-container.component';
 import {parseTakes} from '../../src/utils';
+import {SitterDto} from '../../api-core-ts';
 
 @Component({
   selector: 'app-sitter-card',

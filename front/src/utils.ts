@@ -1,4 +1,5 @@
-import {SitterDto} from '../pursit-api-ts';
+import {SitterDto} from '../api-core-ts';
+
 
 export function shuffleArray(array: any[]) {
   let m = array.length, t, i;

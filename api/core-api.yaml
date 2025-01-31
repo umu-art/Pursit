@@ -1,0 +1,339 @@
+openapi: 3.1.0
+
+info:
+  title: Core module api
+  description: Работа с бизнес логикой
+  version: 1.0.0
+
+servers:
+  - url: 'https://pursit.ru'
+
+security:
+  - jwt: [ ]
+
+paths:
+  /backend/core/user/login:
+    post:
+      tags:
+        - user
+      summary: Авторизация пользователя
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthDto"
+      responses:
+        200:
+          description: Успешная авторизация
+
+  /backend/core/user/logout:
+    post:
+      tags:
+        - user
+      summary: Разавторизация пользователя
+      operationId: logout
+      responses:
+        200:
+          description: Успешная разавторизация
+
+  /backend/core/user/register:
+    post:
+      tags:
+        - user
+      summary: Регистрация пользователя
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterDto"
+      responses:
+        200:
+          description: Успешная авторизация
+
+  /backend/core/user/self:
+    get:
+      tags:
+        - user
+      summary: Получение информации о себе
+      operationId: getSelf
+      responses:
+        200:
+          description: Информация о себе
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+
+  /backend/core/user/link:
+    post:
+      tags:
+        - user
+      summary: Добавление связи с user.id rum'а
+      operationId: link
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rumId:
+                  type: string
+      responses:
+        200:
+          description: Ок
+
+  /backend/core/sitter:
+    get:
+      tags:
+        - sitters
+      summary: Получение ситтеров по ids
+      operationId: getSittersByIds
+      parameters:
+        - name: sittersIds
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+      responses:
+        200:
+          description: Ситтеры
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SitterDto"
+    post:
+      tags:
+        - sitters
+      summary: Обновление ситтера
+      operationId: upsertSitter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SitterDto"
+      responses:
+        200:
+          description: Успеха
+
+  /backend/core/sitter/list:
+    get:
+      tags:
+        - sitters
+      summary: Получение списка ситтеров
+      operationId: getSitters
+      responses:
+        200:
+          description: Список ситтеров
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SitterDto"
+
+  /backend/core/sitter/request:
+    post:
+      tags:
+        - sitters
+      summary: Отправка заявки на передержку
+      operationId: sendRequest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SitterRequestDto"
+      responses:
+        200:
+          description: Заявка отправлена
+
+  /backend/core/help:
+    post:
+      tags:
+        - help
+      summary: Отправка сообщения в службу поддержки
+      operationId: sendHelp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HelpDto"
+      responses:
+        200:
+          description: Сообщение отправлено
+
+components:
+  schemas:
+    AuthDto:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    RegisterDto:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+
+    HelpDto:
+      type: object
+      properties:
+        phone:
+          type: string
+        tg:
+          type: string
+        whatsapp:
+          type: string
+        message:
+          type: string
+
+    SitterDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: "#/components/schemas/SitterType"
+        name:
+          description: Имя ситтера
+          type: string
+        avatarId:
+          description: Аватарка
+          type: string
+        shortDescription:
+          description: Краткое описание
+          type: string
+        longDescription:
+          description: Полное описание
+          type: string
+        price:
+          description: Цена за сутки
+          type: number
+        experience:
+          description: Стаж ситтера
+          type: number
+        photos:
+          description: фотографии (ids)
+          type: array
+          items:
+            type: string
+        readyComeItself:
+          description: Готов сам приехать
+          type: boolean
+        takesCats:
+          type: boolean
+        takesDogs:
+          type: boolean
+        geolocation:
+          $ref: "#/components/schemas/GeolocationDto"
+
+    SitterRequestDto:
+      type: object
+      properties:
+        sitterIds:
+          description: id выбранных ситтеров
+          type: array
+          items:
+            type: string
+            format: uuid
+        fullName:
+          description: Имя владельца
+          type: string
+        phone:
+          description: Номер телефона клиента
+          type: string
+        email:
+          description: Почта клиента
+          type: string
+        tg:
+          description: Ник в телеграме клиента
+          type: string
+        reportsTarget:
+          $ref: "#/components/schemas/ReportsTarget"
+        startDate:
+          description: Дата начала передержки
+          type: string
+          format: date-time
+        endDate:
+          description: Дата окончания передержки
+          type: string
+          format: date-time
+        petName:
+          description: Имя питомца
+          type: string
+        isCat:
+          description: Является ли питомец кошкой, false - собака
+          type: boolean
+        breed:
+          description: Порода питомца
+          type: string
+        isMale:
+          description: Является ли питомец мальчиком, false - девочкой
+          type: boolean
+        height:
+          description: Высота питомца в холке
+          type: string
+        hasVaccinations:
+          description: Наличие прививок у питомца
+          type: boolean
+        otherMessage:
+          description: Другие пожелания клиента
+          type: string
+        needTake:
+          description: Вашего питомца забрать или вы привезете его самостоятельно?
+          type: boolean
+        addressTake:
+          description: Укажите адрес откуда забрать питомца
+          type: string
+
+    ReportsTarget:
+      type: string
+      enum:
+        - tg
+        - whatsapp
+        - email
+
+    GeolocationDto:
+      type: object
+      properties:
+        latitude:
+          description: Широта
+          type: number
+        longitude:
+          description: Долгота
+          type: number
+        name:
+          description: Название
+          type: string
+
+    SitterType:
+      type: string
+      enum:
+        - moral-pet-sitting
+        - pet-sitting
+        - pet-health
+        - pet-moving

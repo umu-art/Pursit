@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {UserService} from '../../pursit-api-ts';
 import {PopupContainerComponent} from '../../components/popup-container/popup-container.component';
-import {ErrorMessagerComponent} from '../../components/error-messager/error-messager.component';
+import {ErrorComponent} from '../../components/error/error.component';
+import {UserHolder} from '../../services/user-holder.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +10,7 @@ import {ErrorMessagerComponent} from '../../components/error-messager/error-mess
   imports: [
     FormsModule
   ],
-  providers: [ErrorMessagerComponent],
+  providers: [ErrorComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -22,28 +22,24 @@ export class RegisterComponent {
 
   constructor(
     protected popup: PopupContainerComponent,
-    private errorMessager: ErrorMessagerComponent,
-    private userService: UserService) {
+    private error: ErrorComponent,
+    private userHolder: UserHolder) {
   }
 
   register() {
     if (this.password !== this.repeatPassword) {
-      this.errorMessager.showErrorMessage('Пароли не совпадают!')
+      this.error.showErrorMessage('Пароли не совпадают!')
       return
     }
 
-    this.userService.register({
-      username: this.username,
-      email: this.email,
-      password: this.password,
-    }).subscribe({
-      next: () => {
-        console.log('Успеха');
-        this.popup.close();
+    this.userHolder.register(
+      {
+        username: this.username,
+        email: this.email,
+        password: this.password,
       },
-      error: resp => {
-        this.errorMessager.showErrorMessage(resp.error);
-      }
-    });
+      () => this.popup.close(),
+      resp => this.error.showErrorMessage(resp.error)
+    );
   }
 }

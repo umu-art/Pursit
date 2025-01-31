@@ -1,0 +1,50 @@
+pursit:
+  auth:
+    jwtSecret: ${JWT_SECRET}
+    jwtExpirationHours: 48
+
+telegram-bot:
+  token: ${TELEGRAM_BOT_TOKEN}
+  username: ${TELEGRAM_BOT_USERNAME}
+  master-chat-id: -1002396511237
+  help-topic-id: 9
+  users-topic-id: 5
+  sitters-request-topic-id: 2
+
+spring:
+  application:
+    name: core
+
+  datasource:
+    url: jdbc:postgresql://postgres.databases.svc.cluster.local:5432/pursit
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8080
+
+logging:
+  level:
+    ru: trace
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true

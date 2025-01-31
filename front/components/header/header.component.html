@@ -9,7 +9,7 @@
     <a href="/home#sitting"><p class="sel m-8 font-16-bold text-center">Услуги</p></a>
     <a href="/home#faq"><p class="sel m-8 font-16-bold text-center">FAQ</p></a>
     <a href="/home#contacts"><p class="sel m-40 font-16-bold text-center">Контакты</p></a>
-    <ng-container *ngIf="!username">
+    <ng-container *ngIf="!userHolder.isLogined()">
       <button
         class="login m-16"
         (click)="popup.login()">Вход
@@ -19,11 +19,11 @@
         (click)="popup.register()">Регистрация
       </button>
     </ng-container>
-    <ng-container *ngIf="username">
-      <p class="m-16 font-16-bold text-center" style="width: min-content;">Здравствуйте, {{ username }}</p>
+    <ng-container *ngIf="userHolder.isLogined()">
+      <p class="m-16 font-16-bold text-center" style="width: min-content;">Здравствуйте, {{ userHolder.currentUser }}</p>
       <button
         class="login"
-        (click)="logout()">Выход
+        (click)="userHolder.logout()">Выход
       </button>
     </ng-container>
   </div>

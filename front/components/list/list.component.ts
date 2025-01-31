@@ -2,10 +2,10 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {SitterCardComponent} from '../sitter-card/sitter-card.component';
 import {NgClass, NgForOf} from '@angular/common';
-import {ApmService} from '../../lib/apm.service';
-import {SitterDto, SittersService, SitterType} from '../../pursit-api-ts';
+import {ApmService} from '../../services/apm.service';
 import {shuffleArray} from '../../src/utils';
 import {ListFlyButtonComponent} from '../list-fly-button/list-fly-button.component';
+import {SitterDto, SittersService, SitterType} from '../../api-core-ts';
 
 export class SitterSelect {
   sitter: SitterDto = {};

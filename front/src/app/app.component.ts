@@ -6,7 +6,7 @@ import {LoginComponent} from '../../popup-conponents/login/login.component';
 import {RegisterComponent} from '../../popup-conponents/register/register.component';
 import {HelpWComponent} from '../../popup-conponents/help-w/help-w.component';
 import {PopupContainerComponent} from '../../components/popup-container/popup-container.component';
-import {ErrorMessagerComponent} from '../../components/error-messager/error-messager.component';
+import {ErrorComponent} from '../../components/error/error.component';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,7 @@ import {ErrorMessagerComponent} from '../../components/error-messager/error-mess
     RegisterComponent,
     HelpWComponent,
     PopupContainerComponent,
-    ErrorMessagerComponent
+    ErrorComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

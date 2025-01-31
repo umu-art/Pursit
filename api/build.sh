@@ -38,27 +38,33 @@ if [ ! -f "build/openapi-generator-cli.jar" ]; then
 fi
 declare -a pids
 
-{
-  echo "Generating js API client"
-  java -jar ./build/openapi-generator-cli.jar generate\
-    -i ./api.yaml\
-    -g typescript-angular\
-    -o ../front/pursit-api-ts
-#  (cd build/pursit-api-ts && npm install && npm run build)
-  echo "js API client build completed"
-} & pids+=($!)
+declare -a modules
+modules+=("core")
+modules+=("media")
 
-{
-  echo "Generating Java API server"
-  java -jar ./build/openapi-generator-cli.jar generate\
-    -i ./api.yaml\
-    -g spring\
-    -o ./build/pursit-api-java\
-    -c ./config/java-spring.yaml
-  echo "Building Java API server"
-  (cd build/pursit-api-java && mvn clean install)
-  echo "Java API server build completed"
-} & pids+=($!)
+for module in "${modules[@]}"; do
+  {
+    echo "Generating ${module} js API client"
+    java -jar ./build/openapi-generator-cli.jar generate\
+      -i ./"${module}"-api.yaml\
+      -g typescript-angular\
+      -o ../front/api-"${module}"-ts
+#    (cd build/"${module}"-api-ts && npm install && npm run build)
+    echo "js API client build completed"
+  } & pids+=($!)
+
+  {
+    echo "Generating ${module} Java API server"
+    java -jar ./build/openapi-generator-cli.jar generate\
+      -i ./"${module}"-api.yaml\
+      -g spring\
+      -o ./build/"${module}"-api-java\
+      -c ./config/java-"${module}"-config.yaml
+    echo "Building Java API server"
+    (cd build/"${module}"-api-java && mvn clean install)
+    echo "Java API server build completed"
+  } & pids+=($!)
+done
 
 for pid in "${pids[@]}"; do
   wait "$pid"

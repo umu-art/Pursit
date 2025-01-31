@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HelpService} from '../../pursit-api-ts';
 import {PopupContainerComponent} from '../../components/popup-container/popup-container.component';
-import {ErrorMessagerComponent} from '../../components/error-messager/error-messager.component';
+import {ErrorComponent} from '../../components/error/error.component';
+import {HelpService} from '../../api-core-ts';
 
 @Component({
   selector: 'app-help-w',
@@ -11,7 +11,7 @@ import {ErrorMessagerComponent} from '../../components/error-messager/error-mess
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [ErrorMessagerComponent],
+  providers: [ErrorComponent],
   templateUrl: './help-w.component.html',
   styleUrl: './help-w.component.css'
 })
@@ -23,7 +23,7 @@ export class HelpWComponent {
 
   constructor(
     protected popup: PopupContainerComponent,
-    private errorMessager: ErrorMessagerComponent,
+    private errorMessager: ErrorComponent,
     private helpService: HelpService) {
   }
 

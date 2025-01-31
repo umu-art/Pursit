@@ -1,0 +1,62 @@
+openapi: 3.1.0
+
+info:
+  title: Media module api
+  description: Работа с медиафайлами
+  version: 1.0.0
+
+servers:
+  - url: 'https://pursit.ru'
+
+paths:
+  /backend/media/upload:
+    post:
+      tags:
+        - media
+      operationId: upload
+      summary: Загрузка медиафайлов
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        200:
+          description: media stream
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadResultDto"
+
+  /backend/media/{id}:
+    get:
+      tags:
+        - media
+      operationId: download
+      summary: Получение медиафайла по id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: media object id
+          schema:
+            type: string
+      responses:
+        200:
+          description: медиафайл
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+
+components:
+  schemas:
+    UploadResultDto:
+      required:
+        - mediaId
+      properties:
+        mediaId:
+          description: media
+          type: string

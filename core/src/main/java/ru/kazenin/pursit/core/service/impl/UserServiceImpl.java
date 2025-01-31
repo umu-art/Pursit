@@ -6,13 +6,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kazenin.pursit.model.UserDto;
 import ru.kazenin.pursit.core.configuration.auth.JwtAuthFilter;
 import ru.kazenin.pursit.core.domain.UserEntity;
 import ru.kazenin.pursit.core.domain.UserLinkEntity;
+import ru.kazenin.pursit.core.exception.NotAllowedException;
 import ru.kazenin.pursit.core.jpa.UserJpa;
 import ru.kazenin.pursit.core.jpa.UserLinkJpa;
 import ru.kazenin.pursit.core.service.UserService;
+import ru.kazenin.pursit.model.UserDto;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -48,10 +49,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public void register(UserEntity user) {
+    public UserEntity register(UserEntity user) {
         log.debug("register: {}", user);
         user.setId(UUID.randomUUID());
-        userJpa.save(user);
+        return userJpa.save(user);
     }
 
     @Override
@@ -86,7 +87,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userLinkJpa.save(link);
     }
 
-    private UserDto toDto(UserEntity entity) {
+    @Override
+    public void requireAdmin() {
+        var entity = JwtAuthFilter.getPerformer();
+        log.debug("requireAdmin: {}", entity.getUsername());
+
+        if (!entity.isAdmin()) {
+            throw new NotAllowedException();
+        }
+    }
+
+    @Override
+    public UserDto toDto(UserEntity entity) {
         return new UserDto()
                 .id(String.valueOf(entity.getId()))
                 .username(entity.getUsername())

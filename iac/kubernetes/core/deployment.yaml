@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: pursit-core
+  namespace: pursit
+  labels:
+    app: pursit-core
+
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: pursit-core
+
+  template:
+    metadata:
+      name: pursit-core
+      labels:
+        app: pursit-core
+
+    spec:
+      containers:
+        - name: pursit-core
+          image: ghcr.io/umu-art/pursit-core:master
+          imagePullPolicy: Always
+
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-token
+                  key: token
+            - name: POSTGRES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: kasumi-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kasumi-secrets
+                  key: POSTGRES_PASSWORD
+            - name: TELEGRAM_BOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: tg-bot-auth
+                  key: name
+            - name: TELEGRAM_BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tg-bot-auth
+                  key: token
+            - name: ELASTIC_APM_SERVER_URL
+              value: http://apm-server.monitoring.svc.cluster.local:8200
+            - name: ELASTIC_APM_SERVICE_NAME
+              value: pursit-core
+            - name: ELASTIC_APM_APPLICATION_PACKAGES
+              value: ru.kazenin.pursit.core
+            - name: ELASTIC_APM_ENVIRONMENT
+              value: pursit
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 20
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 20
+
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "500m"
+            limits:
+              memory: "500Mi"
+
+      imagePullSecrets:
+        - name: github-container-registry
+
+      restartPolicy: Always
+      

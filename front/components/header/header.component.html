@@ -20,7 +20,7 @@
       </button>
     </ng-container>
     <ng-container *ngIf="userHolder.isLogined()">
-      <p class="m-16 font-16-bold text-center" style="width: min-content;">Здравствуйте, {{ userHolder.currentUser }}</p>
+      <p class="m-16 font-16-bold text-center" style="width: min-content;">Здравствуйте, {{ userHolder.currentUser?.username }}</p>
       <button
         class="login"
         (click)="userHolder.logout()">Выход

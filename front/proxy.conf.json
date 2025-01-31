@@ -1,6 +1,11 @@
 {
-  "/backend": {
-    "target": "https://pursit.ru",
+  "/backend/core": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/backend/media": {
+    "target": "http://localhost:9000",
     "secure": false,
     "changeOrigin": true
   }

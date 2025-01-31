@@ -30,6 +30,9 @@ public class UserEntity implements UserDetails {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
+    @Column(name = "is_admin", nullable = false)
+    private boolean isAdmin = false;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();

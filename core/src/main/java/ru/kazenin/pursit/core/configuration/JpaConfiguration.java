@@ -15,7 +15,7 @@ import org.springframework.transaction.TransactionManager;
 import java.util.Objects;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "ru.kazenin.pursit.jpa")
+@EnableJpaRepositories(basePackages = "ru.kazenin.pursit.core.jpa")
 public class JpaConfiguration {
 
     @Bean

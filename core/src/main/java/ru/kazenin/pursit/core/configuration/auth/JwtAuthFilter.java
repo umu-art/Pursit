@@ -31,10 +31,10 @@ import static java.util.Objects.isNull;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     public static final List<String> IGNORE_URL = List.of(
-            "/backend/user/login",
-            "/backend/user/register",
-            "/backend/sitter/list",
-            "/backend/help",
+            "/backend/core/user/login",
+            "/backend/core/user/register",
+            "/backend/core/sitter/list",
+            "/backend/core/help",
             "/actuator/health/readiness",
             "/actuator/health/liveness",
             "/error");

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pursit-media
+  namespace: pursit
+spec:
+  selector:
+    app: pursit-media
+  ports:
+    - protocol: TCP
+      port: 80
+      name: http
+      targetPort: 8080
+  type: ClusterIP

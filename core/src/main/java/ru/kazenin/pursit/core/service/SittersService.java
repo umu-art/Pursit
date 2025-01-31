@@ -12,4 +12,6 @@ public interface SittersService {
     List<SitterDto> getByIds(List<UUID> sittersIds);
 
     void upsert(SitterDto sitterDto);
+
+    void delete(UUID sitterId);
 }

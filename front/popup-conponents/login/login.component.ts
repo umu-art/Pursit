@@ -50,7 +50,7 @@ export class LoginComponent {
         email: this.form.get('email')?.value,
         password: this.form.get('password')?.value,
       },
-      () => this.popup.close(),
+      () => window.location.reload(), // this.popup.close(),
       resp => this.error.showErrorMessage(resp.error)
     );
   }

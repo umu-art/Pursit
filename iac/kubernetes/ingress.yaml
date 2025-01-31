@@ -20,18 +20,18 @@ spec:
                 name: pursit-front
                 port:
                   name: http
-          - path: /backend/
+          - path: /backend/core
             pathType: Prefix
             backend:
               service:
-                name: pursit-back
+                name: pursit-core
                 port:
                   name: http
-          - path: /cdn
+          - path: /backend/media
             pathType: Prefix
             backend:
               service:
-                name: pursit-cdn
+                name: pursit-media
                 port:
                   name: http
 
@@ -45,18 +45,18 @@ spec:
                 name: pursit-front
                 port:
                   name: http
-          - path: /backend/
+          - path: /backend/core
             pathType: Prefix
             backend:
               service:
-                name: pursit-back
+                name: pursit-core
                 port:
                   name: http
-          - path: /cdn
+          - path: /backend/media
             pathType: Prefix
             backend:
               service:
-                name: pursit-cdn
+                name: pursit-media
                 port:
                   name: http
   tls:

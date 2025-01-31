@@ -38,7 +38,7 @@ export class RegisterComponent {
         email: this.email,
         password: this.password,
       },
-      () => this.popup.close(),
+      () => window.location.reload(), // this.popup.close(),
       resp => this.error.showErrorMessage(resp.error)
     );
   }

@@ -4,15 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.GetMe;
-import org.telegram.telegrambots.meta.api.methods.groupadministration.GetChat;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Date;
 
 @Slf4j
 @Component
@@ -24,10 +20,10 @@ public class TelegramBot extends TelegramLongPollingBot {
         super(telegramBotParameters.botToken);
         this.telegramBotParameters = telegramBotParameters;
 
-        log.trace("Tg account: {}", execute(new GetMe()));
-        log.trace("Tg chat: {}", execute(new GetChat(telegramBotParameters.masterChatId)));
-
-        sendMain(String.format("started on %s at %s", InetAddress.getLocalHost().getHostName(), new Date()));
+//        log.trace("Tg account: {}", execute(new GetMe()));
+//        log.trace("Tg chat: {}", execute(new GetChat(telegramBotParameters.masterChatId)));
+//
+//        sendMain(String.format("started on %s at %s", InetAddress.getLocalHost().getHostName(), new Date()));
     }
 
     @Override

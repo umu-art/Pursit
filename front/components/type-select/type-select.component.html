@@ -1,0 +1,8 @@
+<div class="w-container container">
+  <div *ngFor="let val of vals"
+       class="option"
+       [ngClass]="{'option-selected': type == val.type}"
+       (click)="onTypeChange(val.type)">
+    <p>{{ val.name }}</p>
+  </div>
+</div>

@@ -26,6 +26,10 @@ paths:
       responses:
         200:
           description: Успешная авторизация
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
 
   /backend/core/user/logout:
     post:
@@ -51,6 +55,10 @@ paths:
       responses:
         200:
           description: Успешная авторизация
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
 
   /backend/core/user/self:
     get:
@@ -83,6 +91,16 @@ paths:
       responses:
         200:
           description: Ок
+
+  /backend/core/user/admin:
+    get:
+      tags:
+        - user
+      summary: Проверка на админа
+      operationId: checkAdmin
+      responses:
+        200:
+          description: Админ
 
   /backend/core/sitter:
     get:
@@ -118,6 +136,21 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SitterDto"
+      responses:
+        200:
+          description: Успеха
+    delete:
+      tags:
+        - sitters
+      summary: Удаление ситтера
+      operationId: deleteSitter
+      parameters:
+        - name: sitterId
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
         200:
           description: Успеха

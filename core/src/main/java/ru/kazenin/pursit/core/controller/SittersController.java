@@ -1,17 +1,17 @@
 package ru.kazenin.pursit.core.controller;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import ru.kazenin.pursit.api.SittersApi;
-import ru.kazenin.pursit.model.SitterDto;
-import ru.kazenin.pursit.model.SitterRequestDto;
 import ru.kazenin.pursit.core.configuration.TelegramBot;
 import ru.kazenin.pursit.core.configuration.auth.JwtAuthFilter;
 import ru.kazenin.pursit.core.jpa.SitterJpa;
 import ru.kazenin.pursit.core.service.SittersService;
+import ru.kazenin.pursit.core.service.UserService;
+import ru.kazenin.pursit.model.SitterDto;
+import ru.kazenin.pursit.model.SitterRequestDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,12 +22,21 @@ import java.util.UUID;
 public class SittersController implements SittersApi {
 
     private final TelegramBot telegramBot;
+    private final UserService userService;
     private final SittersService sittersService;
     private final SitterJpa sitterJpa;
 
     @Override
     public ResponseEntity<Void> upsertSitter(SitterDto sitterDto) {
+        userService.requireAdmin();
         sittersService.upsert(sitterDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteSitter(UUID sitterId) {
+        userService.requireAdmin();
+        sittersService.delete(sitterId);
         return ResponseEntity.ok().build();
     }
 

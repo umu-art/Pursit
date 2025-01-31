@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import ru.kazenin.pursit.api.HelpApi;
-import ru.kazenin.pursit.model.HelpDto;
 import ru.kazenin.pursit.core.configuration.TelegramBot;
+import ru.kazenin.pursit.model.HelpDto;
 
 @Slf4j
 @Controller

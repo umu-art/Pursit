@@ -37,16 +37,16 @@ public class SitterEntity {
     @Column(name = "avatar_id", nullable = false)
     private String avatarId;
 
-    @Column(name = "short_description", nullable = false)
+    @Column(name = "short_description", length = 4048, nullable = false)
     private String shortDescription;
 
-    @Column(name = "long_description", nullable = false)
+    @Column(name = "long_description", length = 4048, nullable = false)
     private String longDescription;
 
     @Column(name = "price_description", nullable = false)
     private int price;
 
-    @Column(name = "contacts", nullable = false)
+    @Column(name = "contacts", length = 4048, nullable = false)
     private String contacts = "insert here";
 
     @Column(name = "experience", nullable = false)

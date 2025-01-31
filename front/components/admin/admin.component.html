@@ -1,0 +1,22 @@
+<p class="desc">Редактирование ситтеров</p>
+
+<button
+  (click)="gotoSitterEdit(undefined)">
+  Создать нового ситтера
+</button>
+
+<p class="desc">Ситтеры в бд для типа:</p>
+
+<app-type-select [(type)]="type" (typeChange)="reload()"></app-type-select>
+
+<div class="block card w-container"
+     *ngFor="let sitter of sitters">
+  <img src="/backend/media/{{sitter.avatarId}}" width="170px"/>
+  <div>
+    <p>{{ sitter.id }}</p>
+    <p>{{ sitter.name }}</p>
+    <button (click)="gotoSitterEdit(sitter)">
+      Редактировать
+    </button>
+  </div>
+</div>

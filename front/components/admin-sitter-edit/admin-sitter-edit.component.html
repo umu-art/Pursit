@@ -1,0 +1,97 @@
+<h1>Sitter edit:</h1>
+
+<div class="jst">
+  <p>Sitter id:</p>
+  <input type="text" value="{{ sitter.id }}" readonly/>
+</div>
+
+<div class="jst">
+  <p>Sitter type:</p>
+  <app-type-select [(type)]="sitter.type!"></app-type-select>
+</div>
+
+<div class="jst">
+  <p>Sitter name:</p>
+  <input type="text" [(ngModel)]="sitter.name"/>
+</div>
+
+<div class="jst">
+  <p>Sitter avatar:</p>
+  <app-admin-media-upload (mediaId)="sitter.avatarId = $event"></app-admin-media-upload>
+</div>
+
+<div class="jst">
+  <p>Sitter shortDescription:</p>
+  <textarea type="text" [(ngModel)]="sitter.shortDescription" cols="36" rows="5"></textarea>
+</div>
+
+<div class="jst">
+  <p>Sitter longDescription:</p>
+  <textarea type="text" [(ngModel)]="sitter.longDescription" cols="36" rows="10"></textarea>
+</div>
+
+<div class="jst">
+  <p>Sitter price:</p>
+  <input type="number" [(ngModel)]="sitter.price"/>
+</div>
+
+<div class="jst">
+  <p>Sitter experience:</p>
+  <input type="number" [(ngModel)]="sitter.experience"/>
+</div>
+
+<div class="jst">
+  <p>Sitter photos:</p>
+  <div class="h-container" style="gap: 1rem">
+    <div *ngFor="let photo of sitter.photos" class="w-container" style="justify-content: left">
+      <img width="50px" height="50px" src="/backend/media/{{ photo }}" alt="Sitter photo">
+      <button (click)="deletePhoto(photo)">Удалить</button>
+    </div>
+    <app-admin-media-upload (mediaId)="sitter.photos!.push($event)"></app-admin-media-upload>
+  </div>
+</div>
+
+<div class="jst">
+  <input type="checkbox" style="width: fit-content" id="readyComeItself" [(ngModel)]="sitter.readyComeItself"/>
+  <label for="readyComeItself">Sitter readyComeItself</label>
+</div>
+
+<div class="jst">
+  <input type="checkbox" style="width: fit-content" id="takesCats" [(ngModel)]="sitter.takesCats"/>
+  <label for="takesCats">Sitter takesCats</label>
+</div>
+
+<div class="jst">
+  <input type="checkbox" style="width: fit-content" id="takesDogs" [(ngModel)]="sitter.takesDogs"/>
+  <label for="takesDogs">Sitter takesDogs</label>
+</div>
+
+<div class="jst">
+  <p>Sitter geolocation name:</p>
+  <input type="text" [(ngModel)]="sitter.geolocation!.name"/>
+</div>
+
+<h1>Sitter previews:</h1>
+
+<div>
+  <textarea type="text"
+            [value]="sitter | json"
+            cols="80"
+            rows="20"
+            style="font-size: 12px; white-space: pre-wrap; font-family: monospace"
+            readonly>
+  </textarea>
+</div>
+
+<div class="block sitter-card">
+  <app-sitter-card [sitter]="sitter"></app-sitter-card>
+</div>
+<div class="jst">
+  <button (click)="save()">
+    Сохранить
+  </button>
+
+  <button (click)="delete()">
+    Удалить
+  </button>
+</div>

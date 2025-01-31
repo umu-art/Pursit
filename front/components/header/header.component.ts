@@ -14,8 +14,10 @@ import {UserHolder} from '../../services/user-holder.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+
   constructor(
     protected popup: PopupContainerComponent,
-    protected userHolder: UserHolder) {
+    protected userHolder: UserHolder
+  ) {
   }
 }

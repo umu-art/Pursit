@@ -2,6 +2,14 @@ spring:
   application:
     name: media
 
+s3:
+  url: ${S3_URL}
+  key:
+    access: ${S3_ACCESS}
+    secret: ${S3_SECRET}
+  region: ${S3_REGION}
+  bucket: ${S3_BUCKET}
+
 server:
   port: 8080
 

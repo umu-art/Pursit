@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: pursit-media
+  namespace: pursit
+  labels:
+    app: pursit-media
+
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: pursit-media
+
+  template:
+    metadata:
+      name: pursit-media
+      labels:
+        app: pursit-media
+
+    spec:
+      containers:
+        - name: pursit-media
+          image: ghcr.io/umu-art/pursit-media:master
+          imagePullPolicy: Always
+
+          env:
+            - name: S3_URL
+              valueFrom:
+                secretKeyRef:
+                  key: S3_URL
+                  name: s3-auth
+            - name: S3_ACCESS
+              valueFrom:
+                secretKeyRef:
+                  key: S3_ACCESS
+                  name: s3-auth
+            - name: S3_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: S3_SECRET
+                  name: s3-auth
+            - name: S3_REGION
+              valueFrom:
+                secretKeyRef:
+                  key: S3_REGION
+                  name: s3-auth
+            - name: S3_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  key: S3_BUCKET
+                  name: s3-auth
+            - name: ELASTIC_APM_SERVER_URL
+              value: http://apm-server.monitoring.svc.cluster.local:8200
+            - name: ELASTIC_APM_SERVICE_NAME
+              value: pursit-media
+            - name: ELASTIC_APM_APPLICATION_PACKAGES
+              value: ru.kazenin.pursit.media
+            - name: ELASTIC_APM_ENVIRONMENT
+              value: pursit
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 20
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 20
+
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "500m"
+            limits:
+              memory: "500Mi"
+
+      imagePullSecrets:
+        - name: github-container-registry
+
+      restartPolicy: Always
+      

@@ -1,7 +1,7 @@
 package ru.kazenin.pursit.core.service;
 
-import ru.kazenin.pursit.model.UserDto;
 import ru.kazenin.pursit.core.domain.UserEntity;
+import ru.kazenin.pursit.model.UserDto;
 
 import java.util.Optional;
 
@@ -11,7 +11,7 @@ public interface UserService {
 
     boolean existsByEmail(String email);
 
-    void register(UserEntity user);
+    UserEntity register(UserEntity user);
 
     UserDto getSelf();
 
@@ -19,4 +19,7 @@ public interface UserService {
 
     void link(String rumId);
 
+    void requireAdmin();
+
+    UserDto toDto(UserEntity entity);
 }

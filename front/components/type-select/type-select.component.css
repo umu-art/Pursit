@@ -1,0 +1,44 @@
+.container {
+  gap: 20px
+}
+
+.option {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin: 0;
+  padding: 16px 32px;
+
+  border-radius: 40px;
+  color: black;
+  background-color: white;
+  box-shadow: 8px 8px 36px rgba(0, 0, 0, 0.2);
+
+  font-family: eMontserrat, serif;
+  text-align: center;
+  font-size: 20px;
+
+  transition: all 0.2s;
+}
+
+.option p {
+  margin: 0;
+}
+
+.option-selected {
+  background-color: var(--main-color);
+  color: white;
+}
+
+.option:hover {
+  background-color: var(--main-color-hover);
+  color: white;
+}
+
+.option:active {
+  background-color: var(--main-color-pressed);
+  color: white;
+}

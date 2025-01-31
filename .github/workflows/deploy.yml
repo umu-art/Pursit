@@ -44,7 +44,8 @@ jobs:
       - name: Kube rollout restart
         run: kubectl rollout restart deployment/pursit-front -n pursit
 
-  deploy-cdn:
+
+  deploy-core:
     runs-on: ubuntu-latest
 
     permissions:
@@ -59,46 +60,14 @@ jobs:
       - name: Prepare
         uses: ./.github/workflows/actions/prepare_env
 
-      - name: Build docker image
-        uses: ./.github/workflows/actions/build_image
-        with:
-          image: pursit-cdn
-          actor: ${{ github.actor }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set kube context
-        uses: azure/k8s-set-context@v4
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBESECRET }}
-
-      - name: Kube rollout restart
-        run: kubectl rollout restart deployment/pursit-cdn -n pursit
-
-
-  deploy-back:
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      packages: write
-      attestations: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Prepare
-        uses: ./.github/workflows/actions/prepare_env
-
-      - name: Build back
-        working-directory: back
+      - name: Build core
+        working-directory: core
         run: mvn install
 
       - name: Build docker image
         uses: ./.github/workflows/actions/build_image
         with:
-          image: pursit-back
+          image: pursit-core
           actor: ${{ github.actor }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -109,13 +78,49 @@ jobs:
           kubeconfig: ${{ secrets.KUBESECRET }}
 
       - name: Kube rollout restart
-        run: kubectl rollout restart deployment/pursit-back -n pursit
+        run: kubectl rollout restart deployment/pursit-core -n pursit
+
+  deploy-media:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare
+        uses: ./.github/workflows/actions/prepare_env
+
+      - name: Build media
+        working-directory: media
+        run: mvn install
+
+      - name: Build docker image
+        uses: ./.github/workflows/actions/build_image
+        with:
+          image: pursit-media
+          actor: ${{ github.actor }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set kube context
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBESECRET }}
+
+      - name: Kube rollout restart
+        run: kubectl rollout restart deployment/pursit-media -n pursit
+
 
   argo-sync:
     needs:
       - deploy-front
-      - deploy-back
-      - deploy-cdn
+      - deploy-core
+      - deploy-media
 
     runs-on: ubuntu-latest
 

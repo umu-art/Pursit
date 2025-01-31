@@ -8,16 +8,16 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import ru.kazenin.pursit.api.UserApi;
+import ru.kazenin.pursit.core.configuration.TelegramBot;
+import ru.kazenin.pursit.core.configuration.auth.JwtAuthFilter;
+import ru.kazenin.pursit.core.domain.UserEntity;
+import ru.kazenin.pursit.core.exception.BadRequestException;
+import ru.kazenin.pursit.core.service.UserService;
+import ru.kazenin.pursit.core.service.impl.JwtService;
 import ru.kazenin.pursit.model.AuthDto;
 import ru.kazenin.pursit.model.LinkRequest;
 import ru.kazenin.pursit.model.RegisterDto;
 import ru.kazenin.pursit.model.UserDto;
-import ru.kazenin.pursit.core.configuration.TelegramBot;
-import ru.kazenin.pursit.core.configuration.auth.JwtAuthFilter;
-import ru.kazenin.pursit.core.service.UserService;
-import ru.kazenin.pursit.core.service.impl.JwtService;
-import ru.kazenin.pursit.core.domain.UserEntity;
-import ru.kazenin.pursit.core.exception.BadRequestException;
 
 @Slf4j
 @Controller
@@ -30,7 +30,7 @@ public class UserController implements UserApi {
     private final TelegramBot telegramBot;
 
     @Override
-    public ResponseEntity<Void> register(RegisterDto registerDto) {
+    public ResponseEntity<UserDto> register(RegisterDto registerDto) {
         log.debug("register: {}", registerDto);
 
         if (userService.existsByUsername(registerDto.getUsername())) {
@@ -46,7 +46,7 @@ public class UserController implements UserApi {
         user.setPassword(registerDto.getPassword());
         user.setEmail(registerDto.getEmail());
 
-        userService.register(user);
+        user = userService.register(user);
 
         var authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(registerDto.getUsername(), registerDto.getPassword()));
@@ -57,11 +57,11 @@ public class UserController implements UserApi {
 
         return ResponseEntity.ok()
                 .header("Set-Cookie", JwtAuthFilter.AUTH_COOKIE + "=" + token + "; Path=/; HttpOnly; SameSite=Strict")
-                .build();
+                .body(userService.toDto(user));
     }
 
     @Override
-    public ResponseEntity<Void> login(AuthDto authDto) {
+    public ResponseEntity<UserDto> login(AuthDto authDto) {
         log.debug("login: {}", authDto);
         var user = userService.getByEmail(authDto.getEmail());
 
@@ -78,7 +78,7 @@ public class UserController implements UserApi {
 
         return ResponseEntity.ok()
                 .header("Set-Cookie", JwtAuthFilter.AUTH_COOKIE + "=" + token + "; Path=/; HttpOnly; SameSite=Strict")
-                .build();
+                .body(user.get());
     }
 
     @Override
@@ -86,6 +86,12 @@ public class UserController implements UserApi {
         return ResponseEntity.ok()
                 .header("Set-Cookie", JwtAuthFilter.AUTH_COOKIE + "=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT")
                 .build();
+    }
+
+    @Override
+    public ResponseEntity<Void> checkAdmin() {
+        userService.requireAdmin();
+        return ResponseEntity.ok().build();
     }
 
     @Override

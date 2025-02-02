@@ -16,7 +16,6 @@ import ru.kazenin.pursit.core.service.UserService;
 import ru.kazenin.pursit.model.UserDto;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Slf4j
 @Service
@@ -51,7 +50,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     public UserEntity register(UserEntity user) {
         log.debug("register: {}", user);
-        user.setId(UUID.randomUUID());
         return userJpa.save(user);
     }
 

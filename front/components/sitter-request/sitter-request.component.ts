@@ -44,6 +44,8 @@ export class SitterRequestComponent {
         .catch(console.error);
     }
 
+    this.user = userService.currentUser!;
+
     const url: string = this.router.routerState.snapshot.url;
     const params = new URLSearchParams(new URL(url, "https://some.ru/").search);
     this.type = params.get('type')! as SitterType;

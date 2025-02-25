@@ -40,14 +40,18 @@ public class SittersServiceImpl implements SittersService {
 
     @Override
     public void upsert(SitterDto sitterDto) {
-        SitterEntity entity = sitterMapper.toEntity(sitterDto);
+        SitterEntity entity;
 
-        if (nonNull(sitterDto.getId())){
+        if (nonNull(sitterDto.getId())) {
             var fnd = sitterJpa.findById(sitterDto.getId());
             if (fnd.isPresent()) {
                 entity = fnd.get();
                 sitterMapper.update(entity, sitterDto);
+            } else {
+                entity = sitterMapper.toEntity(sitterDto);
             }
+        } else {
+            entity = sitterMapper.toEntity(sitterDto);
         }
 
         entity.getGeolocation().setSitter(entity);

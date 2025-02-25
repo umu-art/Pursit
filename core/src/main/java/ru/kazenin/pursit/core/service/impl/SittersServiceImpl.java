@@ -12,6 +12,8 @@ import ru.kazenin.pursit.model.SitterDto;
 import java.util.List;
 import java.util.UUID;
 
+import static java.util.Objects.nonNull;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -38,14 +40,14 @@ public class SittersServiceImpl implements SittersService {
 
     @Override
     public void upsert(SitterDto sitterDto) {
-        SitterEntity entity;
+        SitterEntity entity = sitterMapper.toEntity(sitterDto);
 
-        var fnd = sitterJpa.findById(sitterDto.getId());
-        if (fnd.isPresent()) {
-            entity = fnd.get();
-            sitterMapper.update(entity, sitterDto);
-        } else {
-            entity = sitterMapper.toEntity(sitterDto);
+        if (nonNull(sitterDto.getId())){
+            var fnd = sitterJpa.findById(sitterDto.getId());
+            if (fnd.isPresent()) {
+                entity = fnd.get();
+                sitterMapper.update(entity, sitterDto);
+            }
         }
 
         entity.getGeolocation().setSitter(entity);

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kazenin.pursit.core.jpa.SitterJpa;
+import ru.kazenin.pursit.core.jpa.SitterPhotoJpa;
 import ru.kazenin.pursit.core.mapper.SitterMapper;
 import ru.kazenin.pursit.core.service.SittersService;
 import ru.kazenin.pursit.model.SitterDto;
@@ -20,6 +21,7 @@ public class SittersServiceImpl implements SittersService {
 
     private final SitterJpa sitterJpa;
     private final SitterMapper sitterMapper;
+    private final SitterPhotoJpa sitterPhotoJpa;
 
     @Override
     public List<SitterDto> getAll() {
@@ -45,6 +47,7 @@ public class SittersServiceImpl implements SittersService {
             var existingEntity = sitterJpa.findById(entity.getId());
             if (existingEntity.isPresent() && nonNull(existingEntity.get().getGeolocation())) {
                 entity.getGeolocation().setId(existingEntity.get().getGeolocation().getId());
+                sitterPhotoJpa.deleteAll(existingEntity.get().getPhotos());
             }
         }
 

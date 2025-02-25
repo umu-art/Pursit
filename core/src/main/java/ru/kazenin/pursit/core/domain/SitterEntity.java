@@ -61,11 +61,11 @@ public class SitterEntity {
     @Column(name = "takes_dogs", nullable = false)
     private boolean takesDogs;
 
-    @OneToMany(mappedBy = "sitter", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sitter", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     private List<SitterPhotoEntity> photos;
 
-    @OneToOne(mappedBy = "sitter", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "sitter", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.JOIN)
     private SitterGeolocationEntity geolocation;
 }

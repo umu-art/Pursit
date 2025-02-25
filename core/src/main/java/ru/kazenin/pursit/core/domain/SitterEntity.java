@@ -40,7 +40,7 @@ public class SitterEntity {
     @Column(name = "short_description", length = 4048, nullable = false)
     private String shortDescription;
 
-    @Column(name = "long_description", length = 4048, nullable = false)
+    @Column(name = "long_description", length = 40480, nullable = false)
     private String longDescription;
 
     @Column(name = "price_description", nullable = false)

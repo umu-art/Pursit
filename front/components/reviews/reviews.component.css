@@ -1,0 +1,31 @@
+.reviews-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  overflow-x: scroll;
+
+  padding: 50px;
+  margin: -50px;
+
+  column-gap: 50px;
+}
+
+.review-card {
+  min-width: 24%;
+  padding: 32px;
+  height: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-photo {
+  width: 160px;
+  height: 160px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 32px;
+}

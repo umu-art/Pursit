@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ApmService} from '../../services/apm.service';
 import {YoutubePlayerComponent} from 'ngx-youtube-player';
 import {NgClass, NgForOf} from '@angular/common';
+import {ReviewsComponent} from '../reviews/reviews.component';
 
 class FaqQuestion {
   q: string = ''
@@ -16,7 +17,8 @@ class FaqQuestion {
   imports: [
     YoutubePlayerComponent,
     NgForOf,
-    NgClass
+    NgClass,
+    ReviewsComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

@@ -9,6 +9,11 @@
   margin-left: 72px;
 }
 
+.slog-btn {
+  margin-left: 72px;
+  margin-bottom: 32px;
+}
+
 .title-img {
   width: 400px;
   margin-right: 80px;
@@ -47,6 +52,7 @@
 }
 
 .sitting-card {
+  filter: brightness(0.9);
   flex: 1;
   padding-bottom: 32px;
 }

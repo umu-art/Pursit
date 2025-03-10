@@ -115,6 +115,12 @@ a {
   line-height: 50px;
 }
 
+.font-32 {
+  font-family: eMontserrat, serif;
+  font-size: 32px;
+  line-height: 40px;
+}
+
 .font-28-bold {
   font-family: eMontserrat, serif;
   font-weight: bold;

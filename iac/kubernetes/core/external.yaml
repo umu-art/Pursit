@@ -15,9 +15,9 @@ spec:
     - secretKey: POSTGRES_USERNAME
       remoteRef:
         key: databases-credentials
-        property: POSTGRES_USERNAME
+        property: PURSIT_POSTGRES_USERNAME
     - secretKey: POSTGRES_PASSWORD
       remoteRef:
         key: databases-credentials
-        property: POSTGRES_PASSWORD
+        property: PURSIT_POSTGRES_PASSWORD
 

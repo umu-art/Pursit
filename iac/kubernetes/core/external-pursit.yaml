@@ -1,0 +1,27 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: pursit-secrets
+  namespace: pursit
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: kasumi-secret-store
+    kind: ClusterSecretStore
+  target:
+    name: pursit-secrets
+  data:
+    - secretKey: JWT_SECRET
+      remoteRef:
+        key: pursit-secrets
+        property: JWT_SECRET
+    - secretKey: TELEGRAM_BOT_USERNAME
+      remoteRef:
+        key: pursit-secrets
+        property: TELEGRAM_BOT_USERNAME
+    - secretKey: TELEGRAM_BOT_TOKEN
+      remoteRef:
+        key: pursit-secrets
+        property: TELEGRAM_BOT_TOKEN
+

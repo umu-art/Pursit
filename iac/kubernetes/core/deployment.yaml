@@ -28,31 +28,31 @@ spec:
           imagePullPolicy: Always
 
           env:
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: jwt-token
-                  key: token
             - name: POSTGRES_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: kasumi-secrets
-                  key: POSTGRES_USER
+                  name: databases-credentials
+                  key: POSTGRES_USERNAME
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: kasumi-secrets
+                  name: databases-credentials
                   key: POSTGRES_PASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: pursit-secrets
+                  key: JWT_SECRET
             - name: TELEGRAM_BOT_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: tg-bot-auth
-                  key: name
+                  name: pursit-secrets
+                  key: TELEGRAM_BOT_USERNAME
             - name: TELEGRAM_BOT_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: tg-bot-auth
-                  key: token
+                  name: pursit-secrets
+                  key: TELEGRAM_BOT_TOKEN
             - name: ELASTIC_APM_SERVER_URL
               value: http://apm-server.monitoring.svc.cluster.local:8200
             - name: ELASTIC_APM_SERVICE_NAME

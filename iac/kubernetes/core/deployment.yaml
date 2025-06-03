@@ -28,31 +28,6 @@ spec:
           imagePullPolicy: Always
 
           env:
-            - name: POSTGRES_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: databases-credentials
-                  key: POSTGRES_USERNAME
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: databases-credentials
-                  key: POSTGRES_PASSWORD
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: pursit-secrets
-                  key: JWT_SECRET
-            - name: TELEGRAM_BOT_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: pursit-secrets
-                  key: TELEGRAM_BOT_USERNAME
-            - name: TELEGRAM_BOT_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: pursit-secrets
-                  key: TELEGRAM_BOT_TOKEN
             - name: ELASTIC_APM_SERVER_URL
               value: http://apm-server.monitoring.svc.cluster.local:8200
             - name: ELASTIC_APM_SERVICE_NAME
@@ -61,6 +36,10 @@ spec:
               value: ru.kazenin.pursit.core
             - name: ELASTIC_APM_ENVIRONMENT
               value: pursit
+
+          envFrom:
+            - secretRef:
+                name: pursit-secrets
 
           livenessProbe:
             httpGet:
@@ -80,8 +59,8 @@ spec:
 
           resources:
             requests:
-              memory: "500Mi"
-              cpu: "500m"
+              memory: "300Mi"
+              cpu: "200m"
             limits:
               memory: "500Mi"
 

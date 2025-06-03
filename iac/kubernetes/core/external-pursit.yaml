@@ -7,11 +7,20 @@ metadata:
 spec:
   refreshInterval: "15s"
   secretStoreRef:
-    name: kasumi-secret-store
+    name: umu-kv
     kind: ClusterSecretStore
   target:
     name: pursit-secrets
   data:
+    - secretKey: POSTGRES_USERNAME
+      remoteRef:
+        key: pursit-secrets
+        property: POSTGRES_USERNAME
+    - secretKey: POSTGRES_PASSWORD
+      remoteRef:
+        key: pursit-secrets
+        property: POSTGRES_PASSWORD
+
     - secretKey: JWT_SECRET
       remoteRef:
         key: pursit-secrets

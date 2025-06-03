@@ -28,31 +28,6 @@ spec:
           imagePullPolicy: Always
 
           env:
-            - name: S3_URL
-              valueFrom:
-                secretKeyRef:
-                  key: S3_URL
-                  name: pursit-s3-credentials
-            - name: S3_ACCESS
-              valueFrom:
-                secretKeyRef:
-                  key: S3_ACCESS
-                  name: pursit-s3-credentials
-            - name: S3_SECRET
-              valueFrom:
-                secretKeyRef:
-                  key: S3_SECRET
-                  name: pursit-s3-credentials
-            - name: S3_REGION
-              valueFrom:
-                secretKeyRef:
-                  key: S3_REGION
-                  name: pursit-s3-credentials
-            - name: S3_BUCKET
-              valueFrom:
-                secretKeyRef:
-                  key: S3_BUCKET
-                  name: pursit-s3-credentials
             - name: ELASTIC_APM_SERVER_URL
               value: http://apm-server.monitoring.svc.cluster.local:8200
             - name: ELASTIC_APM_SERVICE_NAME
@@ -61,6 +36,10 @@ spec:
               value: ru.kazenin.pursit.media
             - name: ELASTIC_APM_ENVIRONMENT
               value: pursit
+
+          envFrom:
+            - secretRef:
+                name: pursit-s3-credentials
 
           livenessProbe:
             httpGet:
@@ -80,8 +59,8 @@ spec:
 
           resources:
             requests:
-              memory: "500Mi"
-              cpu: "500m"
+              memory: "300Mi"
+              cpu: "200m"
             limits:
               memory: "500Mi"
 

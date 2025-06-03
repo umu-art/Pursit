@@ -16,7 +16,7 @@ spec:
         - destination:
             host: pursit-core
             port:
-              name: http
+              number: 80
     - match:
         - uri:
             prefix: /backend/media
@@ -24,12 +24,12 @@ spec:
         - destination:
             host: pursit-media
             port:
-              name: http
+              number: 80
     - match:
         - uri:
             prefix: /
       route:
         - destination:
             port:
-              number: 10000
+              number: 80
             host: proxy-service

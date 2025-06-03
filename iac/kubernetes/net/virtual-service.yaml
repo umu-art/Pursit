@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: pursit
+  namespace: pursit
+spec:
+  hosts:
+    - "pursit.ru"
+  gateways:
+    - pursit-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /backend/core
+      route:
+        - destination:
+            host: pursit-core
+            port:
+              name: http
+    - match:
+        - uri:
+            prefix: /backend/media
+      route:
+        - destination:
+            host: pursit-media
+            port:
+              name: http
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            port:
+              number: 10000
+            host: proxy-service

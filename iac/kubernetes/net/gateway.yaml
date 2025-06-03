@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: pursit-gateway
+  namespace: pursit
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      hosts:
+        - "pursit.ru"
+      tls:
+        mode: SIMPLE
+        credentialName: pursit-tls-certificate

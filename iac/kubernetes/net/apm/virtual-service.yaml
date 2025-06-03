@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: pursit-apm
+  namespace: elastic
+spec:
+  hosts:
+    - "apm.pursit.ru"
+  gateways:
+    - pursit-apm-gateway
+  http:
+    - route:
+        - destination:
+            port:
+              number: 8200
+            host: apm-server

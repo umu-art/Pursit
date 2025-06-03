@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pursit-apm-tls-certificate
+  namespace: istio-system
+spec:
+  secretName: pursit-apm-tls-certificate
+  issuerRef:
+    name: letsencrypt-issuer
+    kind: ClusterIssuer
+  commonName: apm.pursit.ru
+  dnsNames:
+    - apm.pursit.ru

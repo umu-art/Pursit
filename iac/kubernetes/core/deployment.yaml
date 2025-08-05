@@ -34,6 +34,8 @@ spec:
               value: pursit-core
             - name: ELASTIC_APM_APPLICATION_PACKAGES
               value: ru.kazenin.pursit.core
+            - name: ELASTIC_APM_TRANSACTION_IGNORE_USER_AGENTS
+              value: kube-probe/*
             - name: ELASTIC_APM_ENVIRONMENT
               value: pursit
 
